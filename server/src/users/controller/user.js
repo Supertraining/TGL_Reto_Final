@@ -39,15 +39,16 @@ class UserControllers {
     try {
 
       const { username, password } = req.body
-
+     
       const user = await this.productService.login(username, password)
+     
       if (!user) {
         res.status(400).send('Bad Request')
         return
       }
 
       const token = await jwtHandle.createToken({ id: user.id, username: user.username, role: user.role })
-      
+     
       res.send(token)
 
     } catch (error) {

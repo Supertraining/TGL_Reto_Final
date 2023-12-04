@@ -9,7 +9,7 @@ services:
   #     - postgres-tgl
   postgres-tgl:
       image: "postgres"
-      container_name: postgres-tgteam
+      container_name: postgres-tgfinalchallenge
       ports:
         - "5433:5432"
       environment:

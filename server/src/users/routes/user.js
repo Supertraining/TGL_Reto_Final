@@ -1,9 +1,9 @@
-const UserControllers = require('../users/controller/user');
-const UserServices = require('../users/service/user');
-const { models } = require('../db/sequelize')
+const UserControllers = require('../controller/user');
+const UserServices = require('../service/user');
+const { models } = require('../../db/sequelize')
 const router = require('express').Router()
-const isAuthenticated = require('./middlewares/authValidation')
-const authorize = require('./middlewares/roleValidation')
+const isAuthenticated = require('../../middlewares/authValidation')
+const authorize = require('../../middlewares/roleValidation')
 
 class UserRouter {
   constructor() {

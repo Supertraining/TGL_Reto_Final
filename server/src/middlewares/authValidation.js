@@ -1,4 +1,4 @@
-const jwtHandle = require('../../utils/jwt.handle')
+const jwtHandle = require('../../src/utils/jwt.handle')
 require('dotenv').config()
 function isAuthenticated(req, res, next) {
     

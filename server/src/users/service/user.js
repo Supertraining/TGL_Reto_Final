@@ -36,7 +36,7 @@ class UserServices {
 
     try {
 
-      const user = await thhis.models.Users.findOne({
+      const user = await this.models.Users.findOne({
         where: {
           username,
         }
