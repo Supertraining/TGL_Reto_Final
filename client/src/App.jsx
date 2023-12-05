@@ -5,6 +5,8 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns';
 import axios from 'axios';
+import Home from './pages/Home';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
 
@@ -37,17 +39,17 @@ function App() {
   const selectedDates = getDatesInRange(dates[ 0 ].startDate, dates[ 0 ].endDate);
   console.log('ALLDATES:', selectedDates)
 
-  // const getRooms = async () => {
-  //   try {
+  const getRooms = async () => {
+    try {
 
-  //     const dbRooms = await axios.get('http://localhost:3000/api/room');
+      const dbRooms = await axios.get('http://localhost:3000/api/room');
 
-  //     console.log('ROOMS:', dbRooms.data)
+      console.log('ROOMS:', dbRooms.data)
 
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const availableRooms = async () => {
     try {
@@ -63,51 +65,61 @@ function App() {
 
 
   return (
-    <div style={ { marginLeft: '50%', marginTop: '20%' } }>
-      
-      <div>
-        <div>
-           IMAGE
-        </div>
-       
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={ <Home /> } />
+        </Routes>
+      </BrowserRouter>
 
-        <button onClick={()=> setShowDates(!showDates)}>
-         SINGLE ROOM 
-        </button> 
+
+      <div style={ { marginLeft: '50%', marginTop: '20%' } }>
+
+        <div>
+          <div>
+            IMAGE
+          </div>
+
+
+          <button onClick={ () => setShowDates(!showDates) }>
+            SINGLE ROOM
+          </button>
+
+        </div>
+
+        { showDates &&
+          <>
+            <div>
+              <h3>Seleccione una fecha</h3>
+              <DateRange
+                editableDateInputs={ true }
+                onChange={ (item) => setDates([ item.selection ]) }
+                moveRangeOnFirstSelection={ false }
+                ranges={ dates }
+                className='date'
+                minDate={ new Date() }
+              />
+            </div>
+
+            <div>
+              <span>{ `${format(
+                dates[ 0 ].startDate,
+                'MM/dd/yyyy'
+              )} to ${format(dates[ 0 ].endDate, 'MM/dd/yyyy')}` }
+              </span>
+            </div>
+
+
+            <button onClick={ () => availableRooms() }>
+              Habitaciones disponibles
+            </button>
+          </>
+        }
+
 
       </div>
 
-      { showDates &&
-        <>
-        <div>
-          <h3>Seleccione una fecha</h3>
-            <DateRange
-              editableDateInputs={ true }
-              onChange={ (item) => setDates([ item.selection ]) }
-              moveRangeOnFirstSelection={ false }
-              ranges={ dates }
-              className='date'
-              minDate={ new Date() }
-            />
-          </div>
-
-          <div>
-            <span>{ `${format(
-              dates[ 0 ].startDate,
-              'MM/dd/yyyy'
-            )} to ${format(dates[ 0 ].endDate, 'MM/dd/yyyy')}` }
-            </span>
-          </div>
-
-
-          <button onClick={ () => availableRooms() }>
-            Habitaciones disponibles
-          </button>
-        </>
-      }
-
-
-    </div>
+    </>
   )
 }
 

@@ -10,6 +10,7 @@ class RoomRouter {
     router.get('/', roomController.getAll);
     router.post('/availableRooms', roomController.findAvailableRoom);
     router.post('/', roomController.createRoom);
+    
   }
 
   getRouter()
