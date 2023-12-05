@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 const setupModels = require('./init.db');
-const config = require('../config/db');
+const config = require('../../config/db');
 
 const USER = encodeURIComponent(config.user);
 const PASSWORD = encodeURIComponent(config.password);

@@ -2,13 +2,13 @@ const jwtHandle = require('../../utils/jwt.handle')
 
 class UserControllers {
 
-  constructor(productService) {
-    this.productService = productService
+  constructor(userService) {
+    this.userService = userService
   }
   getAll = async (req, res) => {
     try {
 
-      const users = await this.productService.getAll()
+      const users = await this.userService.getAll()
       users.length === 0
         ? res.status(204).send()
         : res.status(200).json(users)
@@ -23,7 +23,7 @@ class UserControllers {
   getById = async (req, res) => {
     try {
 
-      const user = await this.productService.getById(req.params.id)
+      const user = await this.userService.getById(req.params.id)
       !user
         ? res.status(404).send('User not found')
         : res.status(200).json(user)
@@ -40,7 +40,7 @@ class UserControllers {
 
       const { username, password } = req.body
      
-      const user = await this.productService.login(username, password)
+      const user = await this.userService.login(username, password)
      
       if (!user) {
         res.status(400).send('Bad Request')
@@ -64,7 +64,7 @@ class UserControllers {
     try {
 
       const { username, password, role } = req.body
-      const registeredUser = await this.productService.register(username, password, role)
+      const registeredUser = await this.userService.register(username, password, role)
       !registeredUser
         ? res.status(401).send('Bad request')
         : res.status(201).json(registeredUser)
@@ -81,7 +81,7 @@ class UserControllers {
   update = async (req, res) => {
     try {
 
-      const updatedUser = await this.productService.update(req.params.id, req.body)
+      const updatedUser = await this.userService.update(req.params.id, req.body)
       !updatedUser
         ? res.status(404).send('User not found')
         : res.send('User updated')
@@ -96,7 +96,7 @@ class UserControllers {
   delete = async (req, res) => {
     try {
 
-      const deletedUser = await this.productService.delete(req.params.id)
+      const deletedUser = await this.userService.delete(req.params.id)
       !deletedUser
         ? res.status(404).send('User not found')
         : res.send('User deleted successfully')
