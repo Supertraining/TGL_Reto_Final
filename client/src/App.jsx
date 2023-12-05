@@ -20,7 +20,7 @@ function App() {
 
   const [ showDates, setShowDates ] = useState(false)
 
-  console.log('DATES:', dates)
+  // console.log('DATES:', dates)
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -37,14 +37,14 @@ function App() {
   };
 
   const selectedDates = getDatesInRange(dates[ 0 ].startDate, dates[ 0 ].endDate);
-  console.log('ALLDATES:', selectedDates)
+  // console.log('ALLDATES:', selectedDates)
 
   const getRooms = async () => {
     try {
 
       const dbRooms = await axios.get('http://localhost:3000/api/room');
 
-      console.log('ROOMS:', dbRooms.data)
+      // console.log('ROOMS:', dbRooms.data)
 
     } catch (error) {
       console.error(error)
@@ -56,7 +56,7 @@ function App() {
 
       const rooms = await axios.post('http://localhost:3000/api/room/availableRooms', { selectedDates: selectedDates })
 
-      console.log(rooms.data)
+      // console.log(rooms.data)
 
     } catch (error) {
       console.log(error)
