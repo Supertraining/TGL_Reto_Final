@@ -1,0 +1,40 @@
+.header {
+  background-color: #003580;
+  color: white;
+  display: flex;
+  justify-content: center;
+	padding: 10px;
+}
+.headerContainer {
+  width: 100%;
+  max-width: 1024px;
+  margin: 20px 0px 100px 0px;
+}
+
+.headerList {
+  display: flex;
+    gap: clamp(0.3rem, 6vw, 5rem);
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: center;
+}
+.headerListItem {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 1rem);
+}
+.headerListItem>.text {
+  font-size: clamp(0.5rem, 1rem, 1.2rem);
+}
+.headerListItem.active {
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 20px;
+}
+.headerTitle {
+font-size: clamp(1.199rem, 3vw, 3rem);
+}  
+.headerDesc {
+  margin: 20px 0px;
+}

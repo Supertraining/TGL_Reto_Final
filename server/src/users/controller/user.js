@@ -62,7 +62,7 @@ class UserControllers {
 
   register = async (req, res) => {
     try {
-
+     
       const { username, password, role } = req.body
       const registeredUser = await this.userService.register(username, password, role)
       !registeredUser

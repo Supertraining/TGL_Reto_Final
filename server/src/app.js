@@ -7,8 +7,9 @@ const cors = require('cors')
 const userRoutes = new UserRouter();
 const roomRoutes = new RoomRouter();
 
-app.use(express.json());
 app.use(cors())
+app.use(express.json());
+
 app.use('/api/user', userRoutes.getRouter());
 app.use('/api/room', roomRoutes.getRouter());
 
