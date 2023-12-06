@@ -60,6 +60,14 @@ const Rooms = () => {
     }
   }
 
+  const createReservation = async () => {
+
+    const response = axios.post('http://localhost:3000/api/room/reservation', { selectedDates: selectedDates });
+
+    console.log(response)
+
+  }
+
 
 
   return (
@@ -103,6 +111,10 @@ const Rooms = () => {
 
             <button onClick={ () => availableRooms() }>
               Habitaciones disponibles
+            </button>
+
+            <button onClick={ () => createReservation() }>
+              crear reservar
             </button>
           </>
         }
