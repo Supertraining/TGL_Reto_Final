@@ -13,8 +13,10 @@ class UserRouter {
     router.post('/register', userControllers.register)
   
     router.post('/login', userControllers.login);
+
+    router.patch('/reservation/:id', userControllers.createReservation)
   
-    router.use(isAuthenticated)
+    // router.use(isAuthenticated)
   
     router.get('/', authorize('admin'), userControllers.getAll);
   

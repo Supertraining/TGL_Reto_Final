@@ -14,7 +14,7 @@ class UserControllers {
         : res.status(200).json(users)
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       res.status(500).send('Internal server error')
     }
 
@@ -29,7 +29,7 @@ class UserControllers {
         : res.status(200).json(user)
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
       res.status(500).send('Internal server error')
     }
 
@@ -39,21 +39,21 @@ class UserControllers {
     try {
 
       const { username, password } = req.body
-     
+
       const user = await this.userService.login(username, password)
-     
+
       if (!user) {
         res.status(400).send('Bad Request')
         return
       }
 
       const token = await jwtHandle.createToken({ id: user.id, username: user.username, role: user.role })
-     
+
       res.send(token)
 
     } catch (error) {
 
-      console.log(error)
+      console.error(error)
       res.status(500).send('Internal server error')
 
     }
@@ -62,11 +62,10 @@ class UserControllers {
 
   register = async (req, res) => {
     try {
-     
-      const { username, password, role } = req.body
-      const registeredUser = await this.userService.register(username, password, role)
+
+      const registeredUser = await this.userService.register(req.body)
       !registeredUser
-        ? res.status(401).send('Bad request')
+        ? res.status(400).send('Bad request')
         : res.status(201).json(registeredUser)
 
     } catch (error) {
@@ -76,6 +75,20 @@ class UserControllers {
 
     }
 
+  }
+
+  createReservation = async (req, res) => {
+    try {
+
+      const newReservation = await this.userService.createReservation(req.params.id, req.body)
+      newReservation
+        ? res.send('User reservation was created successfully')
+        : res.status(400).send('You already have reservations on those Dates')
+
+    } catch (error) {
+      console.error(error)
+      res.status(500).send('Internal server error')
+    }
   }
 
   update = async (req, res) => {

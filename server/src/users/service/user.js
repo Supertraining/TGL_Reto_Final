@@ -2,7 +2,7 @@ const bcryptHandle = require('../../utils/bcrypt.handle')
 
 class UserServices {
 
-  constructor (models){
+  constructor(models) {
     this.models = models
   }
 
@@ -56,12 +56,13 @@ class UserServices {
 
   }
 
-  async register(username, password, role) {
+  async register(userData) {
 
     try {
-
+      const { fullname, username, password, role } = userData
       const hashedPass = await bcryptHandle.encrypt(password)
       const newUser = await this.models.Users.create({
+        fullname: fullname,
         username: username,
         password: hashedPass,
         role: role
@@ -74,6 +75,41 @@ class UserServices {
 
     }
 
+  }
+
+  async createReservation(id, reservationData) {
+
+    try {
+       
+      const user = await this.models.Users.findByPk(id);
+
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      const existingReservations = user.myReservations.filter(reservation =>
+        reservation.reservationDates.some(date =>
+          reservationData.reservationDates.includes(date)
+        )
+      );
+          
+      if (existingReservations.length > 0) {
+        return null
+      }
+
+      user.myReservations.push(reservationData);
+
+      await this.models.Users.update(
+        { myReservations: user.myReservations },
+        { where: { id: user.id } }
+      );
+
+      return user.myReservations;
+
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   async update(id, data) {

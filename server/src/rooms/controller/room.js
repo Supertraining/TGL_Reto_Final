@@ -27,8 +27,9 @@ class RoomController {
 
     try {
       const { selectedDates } = req.body
-      console.log(selectedDates)
+      
       const availableRooms = await this.roomService.findAvailableRoom(selectedDates)
+      
       res.json(availableRooms)
 
     } catch (error) {
@@ -56,14 +57,15 @@ class RoomController {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
-  }  
+  }
 
   createReservation = async (req, res) => {
     try {
-      console.log(req.body)
-      const reservation = await this.roomService.createReservation(req.body);
-      res.json(reservation);
-      console.log(reservation)
+
+      const newReservation = await this.roomService.createReservation(req.body);
+    
+      res.send('Room reservation was created successfully')     
+
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });

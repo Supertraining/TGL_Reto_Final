@@ -9,6 +9,10 @@ const UserSchema = {
         primaryKey: true,
         type: DataTypes.INTEGER
     },
+    fullname: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -17,6 +21,14 @@ const UserSchema = {
     password: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    myReservations: {
+        type: DataTypes.ARRAY(DataTypes.JSON({
+            reservationId: DataTypes.STRING,
+            roomNumber: DataTypes.INTEGER,
+            reservationDates: DataTypes.ARRAY(DataTypes.DATE),
+        })),
+        defaultValue: []
     },
     role: {
         type: DataTypes.STRING,
