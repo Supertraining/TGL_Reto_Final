@@ -8,8 +8,12 @@ class RoomRouter {
     const roomController = new RoomController(roomService);
 
     router.get('/', roomController.getAll);
-    router.post('/availableRooms', roomController.findAvailableRoom);
+    router.post('/availability', roomController.findAvailableRoom);
     router.post('/', roomController.createRoom);
+    router.delete('/:roomId', roomController.deleteRoom);
+    router.patch('/reservation/:reservationId', roomController.updateReservation);
+    router.put('/reservation', roomController.createReservation);
+    router.put('/:roomId', roomController.updateRoom);
   }
 
   getRouter()
