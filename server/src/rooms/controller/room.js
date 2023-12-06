@@ -36,6 +36,49 @@ class RoomController {
     }
   }
 
+  deleteRoom = async (req, res) => {
+    try {
+      const { roomId } = req.params;
+      const result = await this.roomService.deleteRoom(roomId);
+      res.json(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  updateReservation = async (req, res) => {
+    try {
+      const { reservationId } = req.params;
+      const updatedReservation = await this.roomService.updateReservation(reservationId, req.body);
+      res.json(updatedReservation);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }  
+
+  createReservation = async (req, res) => {
+    try {
+      const reservation = await this.roomService.createReservation(req.body);
+      res.json(reservation);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  updateRoom = async (req, res) => {
+    try {
+      const { roomId } = req.params;
+      const updatedRoom = await this.roomService.updateRoom(roomId, req.body);
+      res.json(updatedRoom);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
 }
 
 
