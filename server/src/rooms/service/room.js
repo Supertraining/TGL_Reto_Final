@@ -71,7 +71,7 @@ class RoomService {
       const { roomId, reservation } = data;
       const updatedRoom = await this.model.findByIdAndUpdate(
         roomId,
-        { $push: { reservations: reservation } },
+        { $push: { unavailableDates: reservation } },
         { new: true }
       );
 
