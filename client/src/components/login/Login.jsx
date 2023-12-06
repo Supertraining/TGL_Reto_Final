@@ -23,7 +23,7 @@ const Login = () => {
         try {
             const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
             const userData = jwtDecode(data);
-
+            console.log(userData)
             dispatch({ type: 'LOGIN_SUCCESS', payload: userData })
 
         } catch (err) {

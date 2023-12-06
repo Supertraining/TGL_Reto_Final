@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const MainRooms = () => {
 
+
   const navigate = useNavigate()
 
   const [ dates, setDates ] = useState([
@@ -36,11 +37,10 @@ const MainRooms = () => {
   const selectedDates = getDatesInRange(dates[ 0 ].startDate, dates[ 0 ].endDate);
 
   const availableRooms = async () => {
+
     try {
 
       const rooms = await axios.post('http://localhost:3000/api/room/availability', { selectedDates: selectedDates })
-
-
 
       rooms
         ? navigate('/available-rooms', { state: {rooms: rooms.data, selectedDates: selectedDates} })
@@ -52,6 +52,7 @@ const MainRooms = () => {
       console.log(error)
     }
   }
+
 
   return (
     <div className='mainRooms-container'>

@@ -47,7 +47,7 @@ class UserControllers {
         return
       }
 
-      const token = await jwtHandle.createToken({ id: user.id, username: user.username, role: user.role })
+      const token = await jwtHandle.createToken({ id: user.id, username: user.username, role: user.role, myReservations: user.myReservations })
 
       res.send(token)
 
