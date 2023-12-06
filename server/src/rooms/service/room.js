@@ -31,6 +31,7 @@ class RoomService {
       });
 
       return availableRooms.length > 0 ? availableRooms : null;
+      
     } catch (error) {
       throw new Error(`Error in findAvailableRoom: ${error.message}`);
     }
@@ -80,6 +81,7 @@ class RoomService {
       }
 
       return updatedRoom;
+      
     } catch (error) {
       throw new Error(`Error in createReservation: ${error.message}`);
     }

@@ -1,5 +1,6 @@
 import Header from '../components/header/Header'
 import Navbar from '../components/navbar/Navbar'
+import Rooms from '../components/rooms/Rooms'
 import './home.css'
 
 // import Footer from '../../components/footer/Footer'
@@ -25,9 +26,11 @@ const Home = () => {
             DISPONIBILIDAD
           </button>
         </div>
-        
+
         DOUBLE ROOMS
         QUADRUPLE ROOMS
+
+        <Rooms />
 
         {/* <Footer /> */ }
       </div>
