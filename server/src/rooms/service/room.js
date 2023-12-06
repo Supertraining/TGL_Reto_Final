@@ -69,10 +69,10 @@ class RoomService {
 
   async createReservation(data) {
     try {
-      const { roomId, reservation } = data;
+      const { roomId, selectedDates } = data;
       const updatedRoom = await this.model.findByIdAndUpdate(
         roomId,
-        { $push: { unavailableDates: reservation } },
+        { $push: { unavailableDates: selectedDates } },
         { new: true }
       );
 

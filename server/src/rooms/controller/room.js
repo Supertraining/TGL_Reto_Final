@@ -60,8 +60,10 @@ class RoomController {
 
   createReservation = async (req, res) => {
     try {
+      console.log(req.body)
       const reservation = await this.roomService.createReservation(req.body);
       res.json(reservation);
+      console.log(reservation)
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });

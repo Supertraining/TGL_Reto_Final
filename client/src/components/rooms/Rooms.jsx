@@ -62,7 +62,7 @@ const Rooms = () => {
 
   const createReservation = async () => {
 
-    const response = axios.post('http://localhost:3000/api/room/reservation', { selectedDates: selectedDates });
+    const response = await axios.put('http://localhost:3000/api/room/reservation', { selectedDates: selectedDates, roomId: "656e8f554a3f4743c7f00485" });
 
     console.log(response)
 
