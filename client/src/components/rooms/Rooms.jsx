@@ -8,13 +8,13 @@ const Rooms = () => {
   const { state } = useLocation()
   const { rooms, selectedDates } = state || {}
 
-  const createReservation = async () => {
+  const createReservation = async (roomNumber, roomId) => {
 
-    const roomResponse = await axios.put('http://localhost:3000/api/room/reservation', { selectedDates: selectedDates, roomId: "656e7d56cfd68f521ca63232" });
+    const roomResponse = await axios.put('http://localhost:3000/api/room/reservation', { selectedDates: selectedDates, roomId: roomId });
 
     const userResponse = await axios.patch('http://localhost:3000/api/user/reservation/1', {
       reservationId: "xxdsdw12345",
-      roomNumber: 2,
+      roomNumber: roomNumber,
       reservationDates: selectedDates
     });
 
@@ -45,13 +45,13 @@ const Rooms = () => {
 
         { rooms && rooms.map((room) => (
           <div key={ window.crypto.randomUUID() }>
-            <p >{ room.number }</p>
+            <p >{ room.roomNumber }</p>
             <p >{ room.type }</p>
             <p >{ room.description }</p>
             <p >{ room.price }</p>
             <span>
               Your selected dates: { `from ${startDate} to ${endDate}` }</span>
-            <button onClick={ () => createReservation() }>
+            <button onClick={ () => createReservation(room.roomNumber, room._id) }>
               crear reservar
             </button>
 
