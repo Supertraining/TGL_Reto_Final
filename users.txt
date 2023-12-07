@@ -1,0 +1,6 @@
+{
+  "fullname": "Matí Maranga",
+  "username": "matiasmaranga@gmail.com", 
+  "password": "12345",
+  "role": "admin"
+}

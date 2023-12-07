@@ -70,12 +70,12 @@ Route: ${additionalInfo.route}
 Method: ${additionalInfo.method}
 IP: ${additionalInfo.ip}
 User_agent: ${additionalInfo.user_agent}
-user: ${additionalInfo.user.username}
+user: ${additionalInfo.user?.username}
 Stack Trace: ${err.stack}\n\n`;
 
       errorLogStream.write(errorMessage);
 
-      console.error(chalk.red('Error occurred, check error.log for more details'));
+      console.error(chalk.red.bold('Error occurred, check error.log file for more details'));
 
     } catch (error) {
 
