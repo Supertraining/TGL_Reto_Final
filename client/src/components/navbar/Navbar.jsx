@@ -1,17 +1,44 @@
 import './navbar.css';
 import { Link } from 'react-router-dom'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import Login from '../login/Login';
+import { jwtDecode } from "jwt-decode";
+import axios from 'axios';
 
 const Navbar = () => {
 
-  const { user, dispatch } = useContext(AuthContext);
+  //const { user, dispatch } = useContext(AuthContext);
 
   const handleLogout = () => {
     localStorage.removeItem('user')
-    dispatch({type: 'LOGOUT'})
+    dispatch({ type: 'LOGOUT' })
   }
+
+  const [ credentials, setCredentials ] = useState({
+    username: undefined,
+    password: undefined,
+});
+
+const { user, loading, error, dispatch } = useContext(AuthContext);
+
+const handleChange = (e) => {
+    setCredentials((prev) => ({ ...prev, [ e.target.id ]: e.target.value }))
+}
+
+const handleClick = async () => {
+
+    dispatch({ type: 'LOGIN_START' });
+    try {
+        const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
+        const userData = jwtDecode(data);
+        console.log(userData)
+        dispatch({ type: 'LOGIN_SUCCESS', payload: userData })
+
+    } catch (err) {
+        dispatch({ type: 'LOGIN_FAILURE', payload: err.response.data })
+    }
+}
 
   return (
     <div className='navbar'>
@@ -19,19 +46,38 @@ const Navbar = () => {
         <Link to='/' className='homeLink'>
           <span className="logo">TOP GUN LAB HOTEL</span>
         </Link>
-        { user
+        {user
           ? <div>
-            { user.username }
+            {user.username}
             <button
               className='logout-btn'
-              onClick={ () => handleLogout()}>
+              onClick={() => handleLogout()}>
               Logout
             </button>
           </div>
-          : <div className="navItems">
-            <Login />
-            <button className="navButton">Register</button>
-          </div> }
+          :
+          // <div className="navItems">
+          //   <Login />
+          //   <button className="navButton">Register</button>
+          // </div>
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+              Login
+            </button>
+            <form class="dropdown-menu p-4">
+              <div class="mb-3">
+                <label for="exampleDropdownFormEmail2" class="form-label">User name</label>
+                <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="username" onChange={ handleChange }/>
+              </div>
+              <div class="mb-3">
+                <label for="exampleDropdownFormPassword2" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password" onChange={ handleChange } />
+              </div>
+              <button disabled={ loading } class="btn btn-primary"onClick={ handleClick } type="submit" >Login</button>
+            { error && <span>{ error.message }</span> }
+            </form>
+          </div>
+        }
       </div>
     </div>
   );
