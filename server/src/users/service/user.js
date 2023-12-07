@@ -1,5 +1,5 @@
-const bcryptHandle = require('../../utils/bcrypt.handle')
-
+const bcryptHandle = require('../../utils/bcrypt.handler')
+const createError = require('../../utils/error.creator')
 class UserServices {
 
   constructor(models) {
@@ -80,11 +80,13 @@ class UserServices {
   async createReservation(id, reservationData) {
 
     try {
-       
+
       const user = await this.models.Users.findByPk(id);
 
       if (!user) {
-        throw new Error('User not found');
+
+        let error = createError(404, 'User not found')
+        throw error
       }
 
       const existingReservations = user.myReservations.filter(reservation =>
@@ -92,9 +94,10 @@ class UserServices {
           reservationData.reservationDates.includes(date)
         )
       );
-          
+
       if (existingReservations.length > 0) {
-        return null
+        let error = createError(400, 'You already have reservations on those Dates')
+        throw error
       }
 
       user.myReservations.push(reservationData);
@@ -107,7 +110,6 @@ class UserServices {
       return user.myReservations;
 
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }

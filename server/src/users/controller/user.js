@@ -1,4 +1,4 @@
-const jwtHandle = require('../../utils/jwt.handle')
+const jwtHandle = require('../../utils/jwt.handler')
 
 class UserControllers {
 
@@ -52,10 +52,7 @@ class UserControllers {
       res.send(token)
 
     } catch (error) {
-
       console.error(error)
-      res.status(500).send('Internal server error')
-
     }
 
   }
@@ -77,17 +74,15 @@ class UserControllers {
 
   }
 
-  createReservation = async (req, res) => {
+  createReservation = async (req, res, next) => {
     try {
 
       const newReservation = await this.userService.createReservation(req.params.id, req.body)
-      newReservation
-        ? res.send('User reservation was created successfully')
-        : res.status(400).send('You already have reservations on those Dates')
+
+      res.send('User reservation was created successfully')
 
     } catch (error) {
-      console.error(error)
-      res.status(500).send('Internal server error')
+      next(error)
     }
   }
 
@@ -100,7 +95,7 @@ class UserControllers {
         : res.send('User updated')
 
     } catch (error) {
-      console.error(error)
+
       res.status(500).send('Internal server error')
     }
 

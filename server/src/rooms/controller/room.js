@@ -33,7 +33,8 @@ class RoomController {
       res.json(availableRooms)
 
     } catch (error) {
-      console.error(error)
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 

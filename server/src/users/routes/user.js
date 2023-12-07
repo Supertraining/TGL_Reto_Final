@@ -1,9 +1,9 @@
 const UserControllers = require('../controller/user');
 const UserServices = require('../service/user');
-const { models } = require('../../db/postgreSQL/sequelize')
-const router = require('express').Router()
-const isAuthenticated = require('../../middlewares/authValidation')
-const authorize = require('../../middlewares/roleValidation')
+const { models } = require('../../db/postgreSQL/sequelize');
+const router = require('express').Router();
+const isAuthenticated = require('../../middlewares/authValidation');
+const authorize = require('../../middlewares/roleValidation');
 
 class UserRouter {
   constructor() {
@@ -11,24 +11,25 @@ class UserRouter {
     const userControllers = new UserControllers(userService)
 
     router.post('/register', userControllers.register)
-  
+
     router.post('/login', userControllers.login);
 
+    router.use(isAuthenticated)
+    
     router.patch('/reservation/:id', userControllers.createReservation)
-  
-    // router.use(isAuthenticated)
-  
+
+
+
     router.get('/', authorize('admin'), userControllers.getAll);
-  
+
     router.get('/:id', userControllers.getById);
-  
+
     router.put('/:id', userControllers.update)
-  
+
     router.delete('/:id', authorize('admin'), userControllers.delete)
-  
+
   }
-  getRouter()
-  {
+  getRouter() {
     return router
   }
 
