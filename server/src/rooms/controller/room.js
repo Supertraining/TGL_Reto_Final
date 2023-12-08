@@ -49,14 +49,13 @@ class RoomController {
     }
   }
 
-  updateReservation = async (req, res) => {
+  updateReservation = async (req, res, next) => {
     try {
       const { reservationId } = req.params;
       const updatedReservation = await this.roomService.updateReservation(reservationId, req.body);
       res.json(updatedReservation);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      next(error)
     }
   }
 

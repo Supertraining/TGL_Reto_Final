@@ -1,3 +1,5 @@
+const createError = require('../../utils/error.creator')
+
 class RoomService {
 
   constructor(model) {
@@ -16,9 +18,11 @@ class RoomService {
   }
   async createRoom(data) {
     try {
+
       const newRoom = new this.model(data)
       const savedRoom = await newRoom.save()
-      return savedRoom
+
+      return savedRoom;
 
     } catch (error) {
       console.error(error)
@@ -60,12 +64,13 @@ class RoomService {
       );
 
       if (!updatedReservation) {
-        throw new Error(`Reservation with ID ${reservationId} not found`);
+        let error = createError(404, 'Reservation not found');
+        throw error
       }
 
       return updatedReservation;
     } catch (error) {
-      throw new Error(`Error in updateReservation: ${error.message}`);
+      throw error
     }
   }
 
@@ -93,6 +98,7 @@ class RoomService {
 
   async updateRoom(roomId, data) {
     try {
+
       const updatedRoom = await this.model.findByIdAndUpdate(roomId, { $set: data }, { new: true });
 
       if (!updatedRoom) {

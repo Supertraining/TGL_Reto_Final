@@ -4,8 +4,8 @@ const error = (err, req, res, next) => {
 
   try {
 
-    const errorStatus = err.status || 500
-    const errorMessage = !err.status ? 'Internal server error' : err.message
+    const errorStatus = err.status || 500;
+    const errorMessage = !err.status ? 'Internal server error' : err.message;
 
     const additionalInfo = {
       route: req.originalUrl,

@@ -19,17 +19,15 @@ class UserControllers {
 
   }
 
-  getById = async (req, res) => {
+  getById = async (req, res, next) => {
     try {
 
       const user = await this.userService.getById(req.params.id)
-      !user
-        ? res.status(404).send('User not found')
-        : res.status(200).json(user)
+  
+      res.status(200).json(user)
 
     } catch (error) {
-      console.error(error)
-      res.status(500).send('Internal server error')
+      next(error)
     }
 
   }
