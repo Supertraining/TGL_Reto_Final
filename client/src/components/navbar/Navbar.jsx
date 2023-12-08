@@ -53,7 +53,7 @@ const handleClick = async () => {
           </div>
           <div className='headerListItem'>
             <i className="bi bi-airplane-fill"></i>
-            <span className='text'>Flights</span>
+            <a href='https://www.google.com/travel/flights?hl=es' target = "_blank" className='text'>Flights</a>
           </div>
           <div className='headerListItem'>
             <i className="bi bi-car-front-fill"></i>
