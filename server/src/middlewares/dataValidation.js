@@ -116,7 +116,7 @@ module.exports = {
     body('price')
       .exists().withMessage('Price is required')
       .trim()
-      .notEmpty('Price cannot be empty'),
+      .notEmpty().withMessage('Price cannot be empty'),
 
     handleValidationErrors
 
