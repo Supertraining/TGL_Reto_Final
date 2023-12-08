@@ -92,7 +92,7 @@ module.exports = {
       .exists().withMessage('type is required')
       .trim()
       .notEmpty().withMessage('Type cannot be empty')
-      .isIn([ 'Single room', 'Double room', 'Quadruple room' ]).withMessage('Invalid room type. Must be single room, double room, quadruple room'),
+      .isIn([ 'Single', 'Double', 'Quadruple' ]).withMessage('Invalid room type. Must be single room, double room, quadruple room'),
 
     handleValidationErrors
   ],
@@ -106,7 +106,7 @@ module.exports = {
       .exists().withMessage('type is required')
       .trim()
       .notEmpty().withMessage('Type cannot be empty')
-      .isIn([ 'Single room', 'Double room', 'Quadruple room' ]).withMessage('Invalid room type'),
+      .isIn([ 'Single', 'Double', 'Quadruple' ]).withMessage('Invalid room type'),
 
     body('description')
       .exists().withMessage('Description is required')

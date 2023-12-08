@@ -56,19 +56,19 @@ const MainRooms = () => {
   let habitaciones = [
     {
       "img": "../../public/simple.jpeg",
-      "type": "Single room",
+      "type": "Single",
       "description": "Habitacion Simple",
       "price": "USD 20",
     },
     {
       "img": "../../public/doble.jpeg",
-      "type": "Double room",
+      "type": "Double",
       "description": "Habitacion doble",
       "price": "USD 35",
     },
     {
       "img": "../../public/quadruple.jpeg",
-      "type": "Quadruple roon",
+      "type": "Quadruple",
       "description": "Habitacion cuadruple",
       "price": "USD 50",
     },
@@ -109,6 +109,18 @@ const MainRooms = () => {
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+      
+      <div className='card-dates-container'>
+        <h3>Seleccione una fecha</h3>
+        <DateRange
+          editableDateInputs={ true }
+          onChange={ (item) => setDates([ item.selection ]) }
+          moveRangeOnFirstSelection={ false }
+          ranges={ dates }
+          className='date'
+          minDate={ new Date() }
+        />
+      </div>
 
       <div className='card-container'>
 
@@ -122,22 +134,13 @@ const MainRooms = () => {
                 <p class="card-text"><small class="text-body-secondary">{ habitacion.price }</small></p>
               </div>
             </div>
-            <div className='card-dates-container'>
-              <h3>Seleccione una fecha</h3>
-              <DateRange
-                editableDateInputs={ true }
-                onChange={ (item) => setDates([ item.selection ]) }
-                moveRangeOnFirstSelection={ false }
-                ranges={ dates }
-                className='date'
-                minDate={ new Date() }
-              />
-              <button
-                className='card-btn'
-                onClick={ () => availableRooms(habitacion.type) }>
-                Available rooms
-              </button>
-            </div>
+
+            <button
+              className='card-btn'
+              onClick={ () => availableRooms(habitacion.type) }>
+              Available rooms
+            </button>
+
           </div>
 
 
