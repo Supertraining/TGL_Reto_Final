@@ -1,53 +1,45 @@
 class RoomController {
   constructor(roomService) {
-    this.roomService = roomService
+    this.roomService = roomService;
   }
 
-  getAll = async (req, res) => {
+  getAll = async (req, res, next) => {
     try {
-
-      const rooms = await this.roomService.getAll()
-      res.json(rooms)
-
+      const rooms = await this.roomService.getAll();
+      res.json(rooms);
     } catch (error) {
-      console.error(error)
+      next(error);
     }
-  }
-  createRoom = async (req, res) => {
+  };
+
+  createRoom = async (req, res, next) => {
     try {
-
-      const room = await this.roomService.createRoom(req.body)
-      res.json(room)
-
+      const room = await this.roomService.createRoom(req.body);
+      res.json(room);
     } catch (error) {
-      console.error(error)
+      next(error);
     }
-  }
-  findAvailableRoom = async (req, res) => {
+  };
 
+  findAvailableRoom = async (req, res, next) => {
     try {
-      const { selectedDates } = req.body
-      
-      const availableRooms = await this.roomService.findAvailableRoom(selectedDates)
-      
-      res.json(availableRooms)
-
+      const { selectedDates } = req.body;
+      const availableRooms = await this.roomService.findAvailableRoom(selectedDates);
+      res.json(availableRooms);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      next(error);
     }
-  }
+  };
 
-  deleteRoom = async (req, res) => {
+  deleteRoom = async (req, res, next) => {
     try {
       const { roomId } = req.params;
       const result = await this.roomService.deleteRoom(roomId);
       res.json(result);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      next(error);
     }
-  }
+  };
 
   updateReservation = async (req, res, next) => {
     try {
@@ -55,35 +47,28 @@ class RoomController {
       const updatedReservation = await this.roomService.updateReservation(reservationId, req.body);
       res.json(updatedReservation);
     } catch (error) {
-      next(error)
+      next(error);
     }
-  }
+  };
 
-  createReservation = async (req, res) => {
+  createReservation = async (req, res, next) => {
     try {
-
       const newReservation = await this.roomService.createReservation(req.body);
-    
-      res.send('Room reservation was created successfully')     
-
+      res.status(201).json({ message: 'Room reservation was created successfully' });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      next(error);
     }
-  }
+  };
 
-  updateRoom = async (req, res) => {
+  updateRoom = async (req, res, next) => {
     try {
       const { roomId } = req.params;
       const updatedRoom = await this.roomService.updateRoom(roomId, req.body);
       res.json(updatedRoom);
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      next(error);
     }
-  }
-
+  };
 }
-
 
 module.exports = RoomController;
