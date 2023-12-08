@@ -23,10 +23,11 @@ class RoomController {
 
   findAvailableRoom = async (req, res, next) => {
     try {
-      const { selectedDates } = req.body
       
-      const availableRooms = await this.roomService.findAvailableRoom(selectedDates)
-      
+      const { selectedDates, type } = req.body
+
+      const availableRooms = await this.roomService.findAvailableRoom(selectedDates, type)
+
       res.json(availableRooms)
 
     } catch (error) {
