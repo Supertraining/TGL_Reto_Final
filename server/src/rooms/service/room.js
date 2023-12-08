@@ -28,24 +28,30 @@ class RoomService {
       console.error(error)
     }
   }
-  async findAvailableRoom(dates) {
-    try {
-      const availableRooms = await this.model.find({
-        unavailableDates: { $not: { $elemMatch: { $in: dates.map(date => new Date(date).getTime()) } } }
-      });
+ 
+  async findAvailableRoom(dates, type) {
 
+    try {
+      const query = {
+        unavailableDates: { $not: { $elemMatch: { $in: dates.map(date => new Date(date).getTime()) } } },
+        type: type  
+      };
+
+      const availableRooms = await this.model.find(query);
+ 
       return availableRooms.length > 0 ? availableRooms : null;
       
     } catch (error) {
-
       throw new Error(`Error in findAvailableRoom: ${error.message}`);
-      
     }
   }
 
+
   async deleteRoom(roomId) {
     try {
+
       const deletedRoom = await this.model.findByIdAndDelete(roomId);
+
       if (!deletedRoom) {
         throw new Error(`Room with ID ${roomId} not found`);
       }
@@ -76,9 +82,9 @@ class RoomService {
 
   async createReservation(data) {
     try {
-      
+
       const { roomId, selectedDates } = data;
-      
+
       const updatedRoom = await this.model.findByIdAndUpdate(
         roomId,
         { $push: { unavailableDates: selectedDates } },
@@ -90,7 +96,7 @@ class RoomService {
       }
 
       return updatedRoom;
-      
+
     } catch (error) {
       throw new Error(`Error in createReservation: ${error.message}`);
     }
