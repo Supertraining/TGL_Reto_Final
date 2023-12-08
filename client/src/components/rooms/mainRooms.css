@@ -1,21 +1,38 @@
+.titulo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .mainRooms-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  color: aliceblue;
+  background-color: #121B25;
 }
 
 .card-container {
-  border: 1px solid silver;
   border-radius: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
   padding: 10px;
+  flex-direction: column;
 }
 
 .card-dates-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.carouselSlide{
+  padding: 5%;
+}
+
+.roomCard{
+  display: flex;
+  justify-content: center;
+  width: 80%;
 }

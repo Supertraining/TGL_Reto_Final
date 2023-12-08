@@ -13,7 +13,7 @@ const Rooms = () => {
     const roomResponse = await axios.put('http://localhost:3000/api/room/reservation', { selectedDates: selectedDates, roomId: roomId });
 
     const userResponse = await axios.patch('http://localhost:3000/api/user/reservation/1', {
-      reservationId: "xxdsdw12345",
+      reservationId: window.crypto.randomUUID(),
       roomNumber: roomNumber,
       reservationDates: selectedDates
     });
