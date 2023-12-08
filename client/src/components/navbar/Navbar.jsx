@@ -47,26 +47,36 @@ const handleClick = async () => {
           <span className="logo">TOP GUN LAB HOTEL</span>
           <img src='../../../public/Hotel2.png' className='img' alt="Top Gun Hotel logo"/>
         </Link>
-        <div className='headerList'>
-          <div className='headerListItem active'>
-            <i className="bi bi-moon-fill"></i>
-            <a href="https://www.trivago.com/" target="_blank" rel="noopener noreferrer" className='text'>Lodgings</a>
+        
+        <div className='headerList'>                 
+          <div id="links" className='headerListItem'>
+          <i id="links" className="bi bi-moon-fill"></i>
+            <a href="https://www.trivago.com/" target="_blank" id="links" rel="noopener noreferrer" className='text'>Lodgings</a>
           </div>
-          <div className='headerListItem'>
-            <i className="bi bi-airplane-fill"></i>
-            <a href="https://www.google.com/travel/flights?hl=es" target="_blank" rel="noopener noreferrer" className='text'>Flights</a>
+          
+          <div className='headerList'>
+            <div id="links" className='headerListItem'>
+            <i id="links" className="bi bi-airplane-fill"></i>
+            <a href="https://www.google.com/travel/flights?hl=es" target="_blank" id= "links" rel="noopener noreferrer" className='text'>Flights</a>
+            </div>
           </div>
-          <div className='headerListItem'>
-            <i className="bi bi-car-front-fill"></i>
-            <a href="https://www.localiza.com/" target="_blank" rel="noopener noreferrer" className='text'>Car rentals</a>
+          <div className='headerList'>
+            <div id="links" className='headerListItem'>
+            <i id="links" className="bi bi-car-front-fill"></i>
+            <a href="https://www.localiza.com/" id="links" target="_blank" rel="noopener noreferrer" className='text'>Car rentals</a>
+            </div>
           </div>
-          <div className='headerListItem'>
-            <i className="bi bi-backpack2-fill"></i>
-            <a href="https://disneyworld.disney.go.com/" target="_blank" rel="noopener noreferrer" className='text'>Attractions</a>
+          <div className='headerList'>
+            <div id="links" className='headerListItem'>
+            <i  className="bi bi-backpack2-fill"></i>
+            <a href="https://disneyworld.disney.go.com/" id="links" target="_blank" rel="noopener noreferrer" className='text'>Attractions</a>
+            </div>
           </div>
-          <div className='headerListItem'>
-          <i className="bi bi-taxi-front-fill"></i>
-          <a href="https://aerotaxi.co/" target="_blank" rel="noopener noreferrer" className='text'>Airport taxis</a>
+          <div className='headerList'>
+            <div id="links" className='headerListItem'>
+            <i id="links" className="bi bi-taxi-front-fill"></i>
+            <a href="https://aerotaxi.co/" id="links" target="_blank" rel="noopener noreferrer" className='text'>Airport taxis</a>
+            </div>
           </div>
         </div>
         {user
