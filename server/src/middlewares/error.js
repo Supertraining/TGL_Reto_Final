@@ -16,6 +16,7 @@ const error = (err, req, res, next) => {
     };
 
     logHandler.errorLogger(err, additionalInfo)
+    
     return res.status(errorStatus).send(errorMessage)
 
   } catch (error) {
