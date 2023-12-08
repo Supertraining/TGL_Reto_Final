@@ -56,19 +56,19 @@ const MainRooms = () => {
   let habitaciones = [
     {
       "img": "../../public/simple.jpeg",
-      "type": "Single room",
+      "type": "Single",
       "description": "Habitacion Simple",
       "price": "USD 20",
     },
     {
       "img": "../../public/doble.jpeg",
-      "type": "Double room",
+      "type": "Double",
       "description": "Habitacion doble",
       "price": "USD 35",
     },
     {
       "img": "../../public/quadruple.jpeg",
-      "type": "Quadruple roon",
+      "type": "Quadruple",
       "description": "Habitacion cuadruple",
       "price": "USD 50",
     },
