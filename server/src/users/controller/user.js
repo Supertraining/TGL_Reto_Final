@@ -5,7 +5,7 @@ class UserControllers {
   constructor(userService) {
     this.userService = userService
   }
-  getAll = async (req, res) => {
+  getAll = async (req, res, next) => {
     try {
 
       const users = await this.userService.getAll()
@@ -14,8 +14,7 @@ class UserControllers {
         : res.status(200).json(users)
 
     } catch (error) {
-      console.error(error)
-      res.status(500).send('Internal server error')
+      next(error)
     }
 
   }
@@ -35,24 +34,19 @@ class UserControllers {
 
   }
 
-  login = async (req, res) => {
+  login = async (req, res, next) => {
     try {
 
       const { username, password } = req.body
 
       const user = await this.userService.login(username, password)
 
-      if (!user) {
-        res.status(400).send('Bad Request')
-        return
-      }
-
       const token = await jwtHandle.createToken({ id: user.id, username: user.username, role: user.role, myReservations: user.myReservations })
 
       res.send(token)
 
     } catch (error) {
-      console.error(error)
+      next(error)
     }
 
   }
@@ -86,31 +80,29 @@ class UserControllers {
     }
   }
 
-  update = async (req, res) => {
+  update = async (req, res, next) => {
     try {
 
       const updatedUser = await this.userService.update(req.params.id, req.body)
-      !updatedUser
-        ? res.status(404).send('User not found')
-        : res.send('User updated')
+
+      res.json(updatedUser)
 
     } catch (error) {
 
-      res.status(500).send('Internal server error')
+      next(error)
     }
 
   }
 
-  delete = async (req, res) => {
+  delete = async (req, res, next) => {
     try {
 
       const deletedUser = await this.userService.delete(req.params.id)
-      !deletedUser
-        ? res.status(404).send('User not found')
-        : res.send('User deleted successfully')
+
+      res.send('User deleted successfully')
+
     } catch (error) {
-      console.error(error)
-      res.status(500).send('Internal server error')
+      next(error)
     }
 
   }

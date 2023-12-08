@@ -24,10 +24,16 @@ class UserServices {
     try {
 
       const user = await this.models.Users.findByPk(id)
+
+      if (!user) {
+        let error = createError(404, 'User not found')
+        throw error
+      }
+
       return user
 
     } catch (error) {
-
+      throw error
     }
 
   }
@@ -41,9 +47,16 @@ class UserServices {
           username,
         }
       });
+
+      if (!user) {
+        let error = createError(404, 'User not found')
+        throw error
+      }
+
       const passwordMatch = await bcryptHandle.verifyPassword(password, user.password)
-      if (!user || !passwordMatch) {
-        throw new Error('Wrong username or password')
+      if (!passwordMatch) {
+        let error = createError(400, 'Wrong password')
+        throw error
       }
 
       return user;
@@ -84,7 +97,6 @@ class UserServices {
       const user = await this.models.Users.findByPk(id);
 
       if (!user) {
-
         let error = createError(404, 'User not found')
         throw error
       }
@@ -116,17 +128,24 @@ class UserServices {
 
   async update(id, data) {
     try {
-      const user = await this.models.Users.findByPk(id)
-      if (!user) {
-        return user
-      }
-      const updatedUser = await this.models.Users.update(data, {
+
+      const [ rowCount, [ updatedUser ] ] = await this.models.Users.update(data, {
         where: {
-          id: user.id,
+          id: id,
         },
+        returning: true,
       });
 
-      return updatedUser
+      if (rowCount === 0) {
+        let error = createError(404, 'User not found');
+        throw error;
+      }
+
+      const { dataValues: updatedUserData } = updatedUser;
+
+      const { password, ...safeUpdatedUserData } = updatedUserData
+
+      return safeUpdatedUserData;
 
     } catch (error) {
 
@@ -144,6 +163,12 @@ class UserServices {
           id: id,
         },
       });
+
+      if (deletedUser === 0) {
+        let error = createError(404, 'User not found')
+        throw error
+      }
+
       return deletedUser
 
     } catch (error) {

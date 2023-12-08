@@ -15,10 +15,8 @@ class UserRouter {
     router.post('/login', userControllers.login);
 
     router.use(isAuthenticated)
-    
+
     router.patch('/reservation/:id', userControllers.createReservation)
-
-
 
     router.get('/', authorize('admin'), userControllers.getAll);
 
