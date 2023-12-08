@@ -109,6 +109,18 @@ const MainRooms = () => {
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+      
+      <div className='card-dates-container'>
+        <h3>Seleccione una fecha</h3>
+        <DateRange
+          editableDateInputs={ true }
+          onChange={ (item) => setDates([ item.selection ]) }
+          moveRangeOnFirstSelection={ false }
+          ranges={ dates }
+          className='date'
+          minDate={ new Date() }
+        />
+      </div>
 
       <div className='card-container'>
 
@@ -122,22 +134,13 @@ const MainRooms = () => {
                 <p class="card-text"><small class="text-body-secondary">{ habitacion.price }</small></p>
               </div>
             </div>
-            <div className='card-dates-container'>
-              <h3>Seleccione una fecha</h3>
-              <DateRange
-                editableDateInputs={ true }
-                onChange={ (item) => setDates([ item.selection ]) }
-                moveRangeOnFirstSelection={ false }
-                ranges={ dates }
-                className='date'
-                minDate={ new Date() }
-              />
-              <button
-                className='card-btn'
-                onClick={ () => availableRooms(habitacion.type) }>
-                Available rooms
-              </button>
-            </div>
+
+            <button
+              className='card-btn'
+              onClick={ () => availableRooms(habitacion.type) }>
+              Available rooms
+            </button>
+
           </div>
 
 

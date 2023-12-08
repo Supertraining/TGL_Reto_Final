@@ -23,9 +23,9 @@ class RoomService {
       throw error;
     }
   }
-  async findAvailableRoom(dates) {
+  async findAvailableRoom(dates, type) {
     try {
-      
+
       const query = {
         unavailableDates: { $not: { $elemMatch: { $in: dates.map(date => new Date(date).getTime()) } } },
         type: type
