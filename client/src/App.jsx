@@ -12,7 +12,7 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
-        <Header />
+        {/* <Header /> */}
         <Routes>
           <Route path='/' element={ <Home /> } />
           <Route path='/available-rooms' element={ <Rooms /> } />

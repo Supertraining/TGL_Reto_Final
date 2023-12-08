@@ -1,7 +1,7 @@
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Rooms = () => {
 
@@ -18,11 +18,11 @@ const Rooms = () => {
       reservationDates: selectedDates
     });
 
-    console.log(roomResponse)
-    console.log(userResponse)
-
+    // console.log(roomResponse)
+    // console.log(userResponse)
   }
-
+  // console.log('selectedday',selectedDates)
+  
   const startDate = selectedDates?.length > 0
     && new Date(selectedDates[ 0 ]).toLocaleDateString('es-AR', {
       day: 'numeric',
@@ -31,7 +31,7 @@ const Rooms = () => {
     });
 
   const endDate = selectedDates && selectedDates.length > 0
-    && new Date(selectedDates[ 2 ]).toLocaleDateString('es-AR', {
+    && new Date(selectedDates[ 1 ]).toLocaleDateString('es-AR', {
       day: 'numeric',
       month: 'numeric',
       year: 'numeric'
@@ -40,12 +40,17 @@ const Rooms = () => {
 
   return (
     <div>
-
-      <div style={ { marginLeft: '50%', marginTop: '20%' } }>
+       <Link to="/">
+          {" "}
+          <span>
+            Back
+          </span>
+        </Link>
+      <div>
 
         { rooms && rooms.map((room) => (
-          <div key={ window.crypto.randomUUID() }>
-            <p >{ room.roomNumber }</p>
+          <div >
+            <p >Room number: { room.roomNumber }</p>
             <p >{ room.type }</p>
             <p >{ room.description }</p>
             <p >{ room.price }</p>
