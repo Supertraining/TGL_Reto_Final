@@ -45,27 +45,28 @@ const handleClick = async () => {
       <div className='navContainer'>
         <Link to='/' className='homeLink'>
           <span className="logo">TOP GUN LAB HOTEL</span>
+          <img src='../../../public/Hotel2.png' className='img' alt="Top Gun Hotel logo"/>
         </Link>
         <div className='headerList'>
           <div className='headerListItem active'>
             <i className="bi bi-moon-fill"></i>
-            <span className='text'>Stays</span>
+            <a href="https://www.trivago.com/" target="_blank" rel="noopener noreferrer" className='text'>Lodgings</a>
           </div>
           <div className='headerListItem'>
             <i className="bi bi-airplane-fill"></i>
-            <span className='text'>Flights</span>
+            <a href="https://www.google.com/travel/flights?hl=es" target="_blank" rel="noopener noreferrer" className='text'>Flights</a>
           </div>
           <div className='headerListItem'>
             <i className="bi bi-car-front-fill"></i>
-            <span className='text'>Car rentals</span>
+            <a href="https://www.localiza.com/" target="_blank" rel="noopener noreferrer" className='text'>Car rentals</a>
           </div>
           <div className='headerListItem'>
             <i className="bi bi-backpack2-fill"></i>
-            <span className='text'>Attractions</span>
+            <a href="https://disneyworld.disney.go.com/" target="_blank" rel="noopener noreferrer" className='text'>Attractions</a>
           </div>
           <div className='headerListItem'>
           <i className="bi bi-taxi-front-fill"></i>
-            <span className='text'>Airport taxis</span>
+          <a href="https://aerotaxi.co/" target="_blank" rel="noopener noreferrer" className='text'>Airport taxis</a>
           </div>
         </div>
         {user
