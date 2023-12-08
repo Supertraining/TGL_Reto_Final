@@ -68,7 +68,7 @@ const handleClick = async () => {
           </div>
           <div className='headerList'>
             <div id="links" className='headerListItem'>
-            <i  className="bi bi-backpack2-fill"></i>
+            <i className="bi bi-backpack2-fill"></i>
             <a href="https://disneyworld.disney.go.com/" id="links" target="_blank" rel="noopener noreferrer" className='text'>Attractions</a>
             </div>
           </div>
@@ -93,7 +93,7 @@ const handleClick = async () => {
           //   <Login />
           //   <button className="navButton">Register</button>
           // </div>
-          <div class="dropdown">
+          <div class="btn-group dropstart">
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
               Login
             </button>
