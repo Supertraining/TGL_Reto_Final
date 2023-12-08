@@ -111,7 +111,7 @@ module.exports = {
     body('description')
       .exists().withMessage('Description is required')
       .trim()
-      .notEmpty('Description cannot be empty'),
+      .notEmpty().withMessage('Description cannot be empty'),
 
     body('price')
       .exists().withMessage('Price is required')
