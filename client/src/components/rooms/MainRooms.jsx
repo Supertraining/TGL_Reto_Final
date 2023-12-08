@@ -113,7 +113,7 @@ const MainRooms = () => {
 
         {habitaciones && habitaciones.map((habitacion) => (
           <div className='roomCard' key={window.crypto.randomUUID()}>
-            <div class="card mb-3">
+            <div class="card mb-3" style={{ width: '100%' }}>
               <img src={habitacion.img} class="card-img-top" alt="..." />
               <div class="card-body">
                 <h5 class="card-title">{habitacion.type}</h5>
