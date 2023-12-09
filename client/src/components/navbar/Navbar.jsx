@@ -4,6 +4,7 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
+import RegisterForm from './Register';
 
 const Navbar = () => {
 
@@ -37,6 +38,12 @@ const Navbar = () => {
     } catch (err) {
       dispatch({ type: 'LOGIN_FAILURE', payload: err.response.data })
     }
+  }
+
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
+
+  const clickRegister = (e) =>{
+    setIsModalOpen(true)
   }
 
   return (
@@ -78,6 +85,11 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+
+        {isModalOpen && (
+        <RegisterForm/>
+      )}
+
         { user
           ? <div>
             { user.username }
@@ -110,7 +122,7 @@ const Navbar = () => {
               <div className='d-flex justify-content-center'>
                 <button disabled={ loading } className="btn btn-primary" onClick={ handleClick } type="submit" >Login</button>
                 { error && <span>{ error.message }</span> }
-                <button className="btn btn-outline-dark" onClick={ handleClick } type="button">Register</button>
+                <button className="btn btn-outline-dark " onClick={ clickRegister } type="button">Register</button>
               </div>
 
             </form>
