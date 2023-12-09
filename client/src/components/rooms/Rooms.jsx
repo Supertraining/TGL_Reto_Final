@@ -61,14 +61,12 @@ const Rooms = () => {
 
   return (
     <div className='ARooms'>
-      <div className='back'>
-        <Link to="/">
+        <Link to="/" className='back'>
           { " " }
           <span>
             Back
           </span>
         </Link>
-      </div>
 
       <h1>{ rooms[ 0 ].type } Room</h1>
       <div className='container'>
