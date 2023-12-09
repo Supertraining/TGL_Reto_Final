@@ -89,7 +89,7 @@ class RoomService {
       if (!updatedRoom) {
         throw createError(404, `Room with ID ${roomId} not found`);
       }
-
+      
       return updatedRoom;
 
     } catch (error) {
