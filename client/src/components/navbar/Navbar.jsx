@@ -51,7 +51,7 @@ const Navbar = () => {
         <div className='headerList'>
           <div id="links" className='headerListItem'>
             <i id="links" className="bi bi-moon-fill"></i>
-            <a href="https://www.trivago.com/" target="_blank" id="links" rel="noopener noreferrer" className='text'>Lodgings</a>
+            <a href="https://www.trivago.com/" target="_blank" rel="noopener noreferrer" className='text'>Lodgings</a>
           </div>
 
           <div className='headerList'>
@@ -100,12 +100,12 @@ const Navbar = () => {
             <form class="dropdown-menu p-4" >
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="email" class="form-control" id="username" placeholder="username"
+                <input type="email" class="form-control-lg" id="username" placeholder="username"
                   onChange={ handleChange } />
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password"
+                <input type="password" class="form-control-lg" id="password" placeholder="Password"
                   onChange={ handleChange } />
               </div>
               <button disabled={ loading } class="btn btn-primary" onClick={ handleClick } type="submit" >Login</button>
