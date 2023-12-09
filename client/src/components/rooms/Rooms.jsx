@@ -65,8 +65,9 @@ const Rooms = () => {
               <span>
                 {`from ${startDate} to ${endDate}`}
               </span>
-              <button onClick={() => createReservation(room.roomNumber, room._id)}>
-                crear reservar
+              <button type="button" class="btn btn-outline-success btn-lg"
+                onClick={() => createReservation(room.roomNumber, room._id)}>
+                Book
               </button>
             </div>
           </div>

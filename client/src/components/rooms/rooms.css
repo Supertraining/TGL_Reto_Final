@@ -6,6 +6,13 @@
 a{
     text-decoration: none;
     color: azure;
+    padding: 0.5rem;
+}
+
+a:hover{
+    border: 1px solid #adb5bd;
+    border-radius: 1rem;
+    padding: 0.5rem;
 }
 
 h1{
@@ -39,4 +46,8 @@ h1{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+button{
+    margin: 1rem;
 }
