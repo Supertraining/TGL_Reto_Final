@@ -1,4 +1,4 @@
-import './mainRooms.css'
+import './mainRooms.css';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRange } from 'react-date-range';
@@ -18,6 +18,8 @@ const MainRooms = () => {
     },
   ]);
 
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
+
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -35,21 +37,26 @@ const MainRooms = () => {
   const selectedDates = getDatesInRange(dates[ 0 ].startDate, dates[ 0 ].endDate);
 
   const availableRooms = async (type) => {
-
+    
     try {
 
+      if (selectedDates.length === 1) {
+        setIsModalOpen(true);
+        return;
+      }
+  
       const rooms = await axios.post('http://localhost:3000/api/room/availability', { selectedDates: selectedDates, type: type })
 
       rooms
         ? navigate('/available-rooms', { state: { rooms: rooms.data, selectedDates: selectedDates } })
         : rooms.data
-
-      console.log(rooms.data)
+  
+      console.log(rooms.data);
 
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   let habitaciones = [
     {
@@ -76,7 +83,7 @@ const MainRooms = () => {
     <div className='mainRooms-container'>
 
       <h1 className='titulo'>Our Rooms</h1>
-      
+
       <div className='card-dates-container'>
         <h3>Select a date</h3>
         <DateRange
@@ -89,11 +96,20 @@ const MainRooms = () => {
         />
       </div>
 
+      {isModalOpen && (
+        <div className='modal-overlay'>
+          <div className='modal-content'>
+            <p>Select minimum two days</p>
+            <button onClick={() => setIsModalOpen(false)}>OK</button>
+          </div>
+        </div>
+      )}
+
       <div className='card-container'>
 
         { habitaciones && habitaciones.map((habitacion) => (
-          <div className='roomCard' style={{ display: 'flex', alignItems: 'center'}} key={ window.crypto.randomUUID() }>
-            <div class="card mb-3" style={ { width: '50%' } }>
+          <div className='roomCard' style={{ display: 'flex', alignItems: 'center' }} key={ window.crypto.randomUUID() }>
+           <div class="card mb-3" style={ { width: '50%' } }>
               <img src={ habitacion.img } class="card-img-top" alt="..." />
               <div class="card-body">
                 <h5 class="card-title">{ habitacion.type }</h5>

@@ -18,73 +18,73 @@ const Navbar = () => {
   const [ credentials, setCredentials ] = useState({
     username: undefined,
     password: undefined,
-});
+  });
 
-const { user, loading, error, dispatch } = useContext(AuthContext);
+  const { user, loading, error, dispatch } = useContext(AuthContext);
 
-const handleChange = (e) => {
+  const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [ e.target.id ]: e.target.value }))
-}
+  }
 
-const handleClick = async () => {
-  console.log(credentials)
+  const handleClick = async () => {
+    console.log(credentials)
     dispatch({ type: 'LOGIN_START' });
     try {
-        const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
-        const userData = jwtDecode(data);
-        console.log(userData)
-        dispatch({ type: 'LOGIN_SUCCESS', payload: userData })
+      const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
+      const userData = jwtDecode(data);
+      
+      dispatch({ type: 'LOGIN_SUCCESS', payload: { ...userData, token: data } })
 
     } catch (err) {
-        dispatch({ type: 'LOGIN_FAILURE', payload: err.response.data })
+      dispatch({ type: 'LOGIN_FAILURE', payload: err.response.data })
     }
-}
+  }
 
   return (
     <div className='navbar'>
       <div className='navContainer'>
         <Link to='/' className='homeLink'>
           <span className="logo">TOP GUN LAB HOTEL</span>
-          <img src='../../../public/Hotel2.png' className='img' alt="Top Gun Hotel logo"/>
+          <img src='../../../public/Hotel2.png' className='img' alt="Top Gun Hotel logo" />
         </Link>
-        
-        <div className='headerList'>                 
+
+        <div className='headerList'>
           <div id="links" className='headerListItem'>
-          <i id="links" className="bi bi-moon-fill"></i>
+            <i id="links" className="bi bi-moon-fill"></i>
             <a href="https://www.trivago.com/" target="_blank" id="links" rel="noopener noreferrer" className='text'>Lodgings</a>
           </div>
-          
+
           <div className='headerList'>
             <div id="links" className='headerListItem'>
-            <i id="links" className="bi bi-airplane-fill"></i>
-            <a href="https://www.google.com/travel/flights?hl=es" target="_blank" id= "links" rel="noopener noreferrer" className='text'>Flights</a>
+              <i id="links" className="bi bi-airplane-fill"></i>
+              <a href="https://www.google.com/travel/flights?hl=es" target="_blank" id="links" rel="noopener noreferrer" className='text'>Flights</a>
             </div>
           </div>
           <div className='headerList'>
             <div id="links" className='headerListItem'>
-            <i id="links" className="bi bi-car-front-fill"></i>
-            <a href="https://www.localiza.com/" id="links" target="_blank" rel="noopener noreferrer" className='text'>Car rentals</a>
+              <i id="links" className="bi bi-car-front-fill"></i>
+              <a href="https://www.localiza.com/" id="links" target="_blank" rel="noopener noreferrer" className='text'>Car rentals</a>
             </div>
           </div>
           <div className='headerList'>
             <div id="links" className='headerListItem'>
-            <i className="bi bi-backpack2-fill"></i>
-            <a href="https://disneyworld.disney.go.com/" id="links" target="_blank" rel="noopener noreferrer" className='text'>Attractions</a>
+              <i className="bi bi-backpack2-fill"></i>
+              <a href="https://disneyworld.disney.go.com/" id="links" target="_blank" rel="noopener noreferrer" className='text'>Attractions</a>
             </div>
           </div>
           <div className='headerList'>
             <div id="links" className='headerListItem'>
-            <i id="links" className="bi bi-taxi-front-fill"></i>
-            <a href="https://aerotaxi.co/" id="links" target="_blank" rel="noopener noreferrer" className='text'>Airport taxis</a>
+              <i id="links" className="bi bi-taxi-front-fill"></i>
+              <a href="https://aerotaxi.co/" id="links" target="_blank" rel="noopener noreferrer" className='text'>Airport taxis</a>
             </div>
           </div>
         </div>
-        {user
+        { user
           ? <div>
-            {user.username}
+            { user.username }
             <button
               className='logout-btn'
-              onClick={() => handleLogout()}>
+              onClick={ () => handleLogout() }>
               Logout
             </button>
           </div>
@@ -101,15 +101,15 @@ const handleClick = async () => {
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="email" class="form-control" id="username" placeholder="username"
-                onChange={ handleChange }/>
+                  onChange={ handleChange } />
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Password"
-                onChange={ handleChange } />
+                  onChange={ handleChange } />
               </div>
               <button disabled={ loading } class="btn btn-primary" onClick={ handleClick } type="submit" >Login</button>
-            { error && <span>{ error.message }</span> }
+              { error && <span>{ error.message }</span> }
             </form>
           </div>
         }

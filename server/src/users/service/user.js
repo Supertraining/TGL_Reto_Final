@@ -103,7 +103,7 @@ class UserServices {
 
       const existingReservations = user.myReservations.filter(reservation =>
         reservation.reservationDates.some(date =>
-          reservationData.reservationDates.includes(date)
+          reservationData.selectedDates.includes(date)
         )
       );
 
@@ -112,7 +112,7 @@ class UserServices {
         throw error
       }
 
-      user.myReservations.push(reservationData);
+      user.myReservations.push({...reservationData, reservationDates: reservationData.selectedDates});
 
       await this.models.Users.update(
         { myReservations: user.myReservations },
