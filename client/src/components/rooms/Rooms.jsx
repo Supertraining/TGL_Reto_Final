@@ -47,12 +47,15 @@ const Rooms = () => {
 
   return (
     <div className='ARooms'>
-      <Link to="/">
+      <div className='back'>
+        <Link to="/">
         {" "}
         <span>
           Back
         </span>
       </Link>
+      </div>
+      
       <h1>{rooms[0].type} Room</h1>
       <div className='container'>
         {rooms && rooms[0].type === 'Single' ? <img src="../../public/simple.jpeg" className='image' alt="..." />

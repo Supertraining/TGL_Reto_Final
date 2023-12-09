@@ -3,13 +3,13 @@
     padding: 1.2%;
 }
 
-a{
+.back{
     text-decoration: none;
     color: azure;
     padding: 0.5rem;
 }
 
-a:hover{
+.back:hover{
     border: 1px solid #adb5bd;
     border-radius: 1rem;
     padding: 0.5rem;
