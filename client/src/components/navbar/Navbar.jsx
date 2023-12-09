@@ -27,7 +27,7 @@ const handleChange = (e) => {
 }
 
 const handleClick = async () => {
-
+  console.log(credentials)
     dispatch({ type: 'LOGIN_START' });
     try {
         const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
@@ -99,14 +99,16 @@ const handleClick = async () => {
             </button>
             <form class="dropdown-menu p-4">
               <div class="mb-3">
-                <label for="exampleDropdownFormEmail2" class="form-label">User name</label>
-                <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="username" onChange={ handleChange }/>
+                <label for="username" class="form-label">Username</label>
+                <input type="email" class="form-control" id="username" placeholder="username"
+                onChange={ handleChange }/>
               </div>
               <div class="mb-3">
-                <label for="exampleDropdownFormPassword2" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password" onChange={ handleChange } />
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password"
+                onChange={ handleChange } />
               </div>
-              <button disabled={ loading } class="btn btn-primary"onClick={ handleClick } type="submit" >Login</button>
+              <button disabled={ loading } class="btn btn-primary" onClick={ handleClick } type="submit" >Login</button>
             { error && <span>{ error.message }</span> }
             </form>
           </div>
