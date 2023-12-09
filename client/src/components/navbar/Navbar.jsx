@@ -87,7 +87,7 @@ const Navbar = () => {
         </div>
 
         {isModalOpen && (
-        <RegisterForm/>
+        <RegisterForm isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
       )}
 
         { user
@@ -119,7 +119,7 @@ const Navbar = () => {
                 <input type="password" className="form-control-lg" id="password" placeholder="Password"
                   onChange={ handleChange } />
               </div>
-              <div className='d-flex justify-content-center'>
+          <div className='d-flex justify-content-center'>
                 <button disabled={ loading } className="btn btn-primary" onClick={ handleClick } type="submit" >Login</button>
                 { error && <span>{ error.message }</span> }
                 <button className="btn btn-outline-dark " onClick={ clickRegister } type="button">Register</button>
