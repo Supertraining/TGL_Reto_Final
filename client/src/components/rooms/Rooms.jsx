@@ -52,7 +52,7 @@ const Rooms = () => {
     });
 
   const endDate = selectedDates && selectedDates.length > 0
-    && new Date(selectedDates[ 1 ]).toLocaleDateString('es-AR', {
+    && new Date(selectedDates[selectedDates.length-1]).toLocaleDateString('es-AR', {
       day: 'numeric',
       month: 'numeric',
       year: 'numeric'

@@ -15,7 +15,7 @@ const Navbar = () => {
     dispatch({ type: 'LOGOUT' })
   }
 
-  const [ credentials, setCredentials ] = useState({
+  const [credentials, setCredentials] = useState({
     username: undefined,
     password: undefined,
   });
@@ -23,11 +23,11 @@ const Navbar = () => {
   const { user, loading, error, dispatch } = useContext(AuthContext);
 
   const handleChange = (e) => {
-    setCredentials((prev) => ({ ...prev, [ e.target.id ]: e.target.value }))
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }))
   }
 
   const handleClick = async () => {
-    
+
     dispatch({ type: 'LOGIN_START' });
     try {
       const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
@@ -40,9 +40,9 @@ const Navbar = () => {
     }
   }
 
-  const [ isModalOpen, setIsModalOpen ] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const clickRegister = () =>{
+  const clickRegister = () => {
     setIsModalOpen(true)
   }
 
@@ -87,23 +87,22 @@ const Navbar = () => {
         </div>
 
         {isModalOpen && (
-        <RegisterForm isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}/>
-      )}
+          <RegisterForm isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        )}
 
-        { user
+        {user
           ? <div>
-            { user.username }
+            {user.username}
+            <Link to='/user-info' className='myReservations'>
+              <p className="logo">My reservations</p>
+            </Link>
             <button
               className='logout-btn'
-              onClick={ () => handleLogout() }>
+              onClick={() => handleLogout()}>
               Logout
             </button>
           </div>
           :
-          // <div className="navItems">
-          //   <Login />
-          //   <button className="navButton">Register</button>
-          // </div>
           <div className="btn-group dropstart">
             <button type="button" className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
               Login
@@ -112,17 +111,17 @@ const Navbar = () => {
               <div className="mb-3">
                 <label htmlFor="username" className="form-label">Username</label>
                 <input type="email" className="form-control-lg" id="username" placeholder="username"
-                  onChange={ handleChange } />
+                  onChange={handleChange} />
               </div>
               <div className="mb-3">
                 <label htmlFor="password" className="form-label">Password</label>
                 <input type="password" className="form-control-lg" id="password" placeholder="Password"
-                  onChange={ handleChange } />
+                  onChange={handleChange} />
               </div>
-          <div className='d-flex justify-content-center'>
-                <button disabled={ loading } className="btn btn-primary" onClick={ handleClick } type="submit" >Login</button>
-                { error && <span>{ error.message }</span> }
-                <button className="btn btn-outline-dark " onClick={ clickRegister } type="button">Register</button>
+              <div className='d-flex justify-content-center'>
+                <button disabled={loading} className="btn btn-primary" onClick={handleClick} type="submit" >Login</button>
+                {error && <span>{error.message}</span>}
+                <button className="btn btn-outline-dark " onClick={clickRegister} type="button">Register</button>
               </div>
 
             </form>
