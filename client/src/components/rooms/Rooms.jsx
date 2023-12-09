@@ -3,15 +3,19 @@ import 'react-date-range/dist/theme/default.css';
 import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
 import './rooms.css'
+import { useNavigate } from 'react-router-dom';
 
 const Rooms = () => {
 
   const { state } = useLocation()
   const { rooms, selectedDates } = state || {}
 
-  const createReservation = async (roomNumber, roomId) => {
+  const navigate = useNavigate()
 
+  const createReservation = async (roomNumber, roomId) => {
+    
     const roomResponse = await axios.put('http://localhost:3000/api/room/reservation', { selectedDates: selectedDates, roomId: roomId });
+    console.log(roomResponse)
 
     const userResponse = await axios.patch('http://localhost:3000/api/user/reservation/1', {
       reservationId: window.crypto.randomUUID(),
@@ -19,8 +23,11 @@ const Rooms = () => {
       reservationDates: selectedDates
     });
 
-    // console.log(roomResponse)
-    // console.log(userResponse)
+    if (userResponse.status === 200) {
+      navigate('/user-info')
+    }
+   console.log(userResponse)
+   console.log(userResponse.status)
   }
 
   const startDate = selectedDates?.length > 0

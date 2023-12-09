@@ -1,0 +1,24 @@
+.usercontainer{
+    background-color: #121B25;
+    color: aliceblue;
+}
+
+a{
+    text-decoration: none;
+    color: azure;
+    padding: 0.5rem;
+}
+
+p{
+    margin: 0px;
+}
+
+.reservations{
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid white;
+    border-radius: 1rem;
+    padding: 1rem;
+    align-items: center;
+    margin: 2rem;
+}
