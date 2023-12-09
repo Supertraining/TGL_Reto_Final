@@ -109,12 +109,12 @@ const MainRooms = () => {
 
         { habitaciones && habitaciones.map((habitacion) => (
           <div className='roomCard' style={{ display: 'flex', alignItems: 'center' }} key={ window.crypto.randomUUID() }>
-           <div class="card mb-3" style={ { width: '50%' } }>
-              <img src={ habitacion.img } class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">{ habitacion.type }</h5>
-                <p class="card-text">{ habitacion.description }</p>
-                <p class="card-text"><small class="text-body-secondary">{ habitacion.price }</small></p>
+           <div className="card mb-3" style={ { width: '50%' } }>
+              <img src={ habitacion.img } className="card-img-top" alt="..." />
+              <div className="card-body">
+                <h5 className="card-title">{ habitacion.type }</h5>
+                <p className="card-text">{ habitacion.description }</p>
+                <p className="card-text"><small className="text-body-secondary">{ habitacion.price }</small></p>
               </div>
             </div>
 
