@@ -99,7 +99,7 @@ const MainRooms = () => {
       {isModalOpen && (
         <div className='modal-overlay'>
           <div className='modal-content'>
-            <p>Select minimum two days</p>
+            <p>Select at least two dates</p>
             <button onClick={() => setIsModalOpen(false)}>OK</button>
           </div>
         </div>
@@ -118,10 +118,9 @@ const MainRooms = () => {
               </div>
             </div>
 
-            <div style={{ padding: '30px' }}>
+            <div>
               <button
                 className='card-btn'
-                style={{ height: '40px', border: 'none', background: '#0071c2', color: 'white', cursor: 'pointer', borderRadius: '5px', fontWeight: 'bold' }}
                 onClick={ () => availableRooms(habitacion.type) }>
                 Check Available Rooms
               </button>

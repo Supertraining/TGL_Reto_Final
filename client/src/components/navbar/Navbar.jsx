@@ -2,7 +2,6 @@ import './navbar.css';
 import { Link } from 'react-router-dom'
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import Login from '../login/Login';
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 
@@ -32,7 +31,7 @@ const Navbar = () => {
     try {
       const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
       const userData = jwtDecode(data);
-      
+
       dispatch({ type: 'LOGIN_SUCCESS', payload: { ...userData, token: data } })
 
     } catch (err) {
@@ -93,24 +92,27 @@ const Navbar = () => {
           //   <Login />
           //   <button className="navButton">Register</button>
           // </div>
-          <div class="btn-group dropstart">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+          <div className="btn-group dropstart">
+            <button type="button" className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
               Login
             </button>
-            <form class="dropdown-menu p-4" >
-              <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="email" class="form-control-lg" id="username" placeholder="username"
+            <form className="dropdown-menu p-1 col-3" >
+              <div className="mb-3">
+                <label htmlFor="username" className="form-label">Username</label>
+                <input type="email" className="form-control-lg" id="username" placeholder="username"
                   onChange={ handleChange } />
               </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control-lg" id="password" placeholder="Password"
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">Password</label>
+                <input type="password" className="form-control-lg" id="password" placeholder="Password"
                   onChange={ handleChange } />
               </div>
-              <button disabled={ loading } class="btn btn-primary" onClick={ handleClick } type="submit" >Login</button>
-              { error && <span>{ error.message }</span> }
-              <button  cLass="btn btn-outline-dark" onClick={ handleClick } type="button">Register</button>
+              <div className='d-flex justify-content-center'>
+                <button disabled={ loading } className="btn btn-primary" onClick={ handleClick } type="submit" >Login</button>
+                { error && <span>{ error.message }</span> }
+                <button className="btn btn-outline-dark" onClick={ handleClick } type="button">Register</button>
+              </div>
+
             </form>
           </div>
         }
