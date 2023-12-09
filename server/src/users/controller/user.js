@@ -49,18 +49,16 @@ class UserControllers {
 
   }
 
-  register = async (req, res) => {
+  register = async (req, res, next) => {
     try {
 
       const registeredUser = await this.userService.register(req.body)
-      !registeredUser
-        ? res.status(400).send('Bad request')
-        : res.status(201).json(registeredUser)
+      
+      res.status(201).send(`User ${registeredUser.username} created successfully`)
 
     } catch (error) {
 
-      console.error(error)
-      res.status(500).send('Internal server error')
+      next(error)
 
     }
 

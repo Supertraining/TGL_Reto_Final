@@ -72,6 +72,18 @@ class UserServices {
   async register(userData) {
 
     try {
+      
+      const user = await this.models.Users.findOne({
+        where: {
+          username: userData.username,
+        }
+      });
+
+      if (user) {
+        let error = createError(400, 'User already exists')
+        throw error
+      }
+
       const { fullname, username, password, role } = userData
       const hashedPass = await bcryptHandle.encrypt(password)
       const newUser = await this.models.Users.create({
@@ -80,6 +92,7 @@ class UserServices {
         password: hashedPass,
         role: role
       })
+    
       return newUser
 
     } catch (error) {
@@ -112,7 +125,7 @@ class UserServices {
         throw error
       }
 
-      user.myReservations.push({...reservationData, reservationDates: reservationData.selectedDates});
+      user.myReservations.push({ ...reservationData, reservationDates: reservationData.selectedDates });
 
       await this.models.Users.update(
         { myReservations: user.myReservations },

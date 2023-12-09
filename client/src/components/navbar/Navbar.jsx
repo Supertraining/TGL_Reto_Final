@@ -27,7 +27,7 @@ const Navbar = () => {
   }
 
   const handleClick = async () => {
-    console.log(credentials)
+    
     dispatch({ type: 'LOGIN_START' });
     try {
       const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
@@ -42,7 +42,7 @@ const Navbar = () => {
 
   const [ isModalOpen, setIsModalOpen ] = useState(false);
 
-  const clickRegister = (e) =>{
+  const clickRegister = () =>{
     setIsModalOpen(true)
   }
 

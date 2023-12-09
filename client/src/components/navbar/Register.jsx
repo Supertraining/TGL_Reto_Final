@@ -1,87 +1,113 @@
 import './register.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { jwtDecode } from "jwt-decode";
+import PropTypes from 'prop-types'
 
-const RegisterForm = ({ setIsModalOpen, isModalOpen }) => {
+const RegisterForm = ({ setIsModalOpen }) => {
 
-  const [formData, setFormData] = useState({
+  const { dispatch } = useContext(AuthContext)
+
+  const [ formData, setFormData ] = useState({
     fullname: undefined,
     username: undefined,
     password: undefined,
-    role: 'user',
+    //role: 'user', Pao aca no hace falta poner este campo, en el back lo hace por default
   });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [ e.target.name ]: e.target.value,
     });
     console.log(formData)
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
     if (
       !formData.fullname ||
       !formData.password ||
       !formData.username
     ) {
-      dispatch(
-        setMessaggeError({ msg: "One of the required fields is incorrect" })
-      );
+
+      console.log({ msg: "One of the required fields is incorrect" });
+
       return;
     }
-    dispatch({ type: 'REGISTER_START' });
+
     try {
-      const { data } = await axios.post('http://localhost:3000/api/user/register', formData)
+
+      const response = await axios.post('http://localhost:3000/api/user/register', formData);
+
+      if (response) {
+        console.log('LOGIN SUCCESSFUL!!')
+        console.log(response.data)
+      }
+
+      dispatch({ type: 'LOGIN_START' });
+
+      const credentials = { username: formData.username, password: formData.password }
+
+      const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
       const userData = jwtDecode(data);
-      console.log(userData)
-      dispatch({ type: 'REGISTER_SUCCESS', payload: formData })
+
+      dispatch({ type: 'LOGIN_SUCCESS', payload: { ...userData, token: data } })
+
+      setIsModalOpen(false)
+      if (data) {
+        console.log('YOU ARE LOGGED IN!!')
+      }
 
     } catch (err) {
-      dispatch({ type: 'REGISTER_FAILURE', payload: err.response.data })
+      console.log(err)
     }
-  };
-
+  }
   return (
     <div className='modal-overlay'>
       <div className='modal-content'>
         <p>Register</p>
-        <form onSubmit={handleSubmit} className='form'>
+        <form onSubmit={ handleSubmit } className='form'>
           <div className='inputsform'>
             <input
               className='fullname'
               type="text"
               name="fullname"
               placeholder="fullname"
-              onChange={handleChange}
-              value={formData.fullname}
+              onChange={ handleChange }
+              value={ formData.fullname }
             />
             <input
               className='username'
               type="text"
               name="username"
               placeholder="username"
-              onChange={handleChange}
-              value={formData.username}
+              onChange={ handleChange }
+              value={ formData.username }
             />
             <input
               className='password'
               type="text"
               name="password"
               placeholder="password"
-              onChange={handleChange}
-              value={formData.password}
+              onChange={ handleChange }
+              value={ formData.password }
             />
           </div>
+          <button type='submit'>Register</button>
+          <button onClick={ () => setIsModalOpen(false) }>Close</button>
         </form>
-        <button onClick={() => setIsModalOpen(false)}>Register</button>
+
       </div>
     </div>
   )
 
+}
+
+RegisterForm.propTypes = {
+  setIsModalOpen: PropTypes.func,
 }
 
 export default RegisterForm;
