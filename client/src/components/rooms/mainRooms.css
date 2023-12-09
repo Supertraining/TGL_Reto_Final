@@ -70,3 +70,7 @@
   border-radius: 5px;
   font-weight: bold;
 }
+
+.card-dates-container button{
+  margin: 0rem !important;
+}
