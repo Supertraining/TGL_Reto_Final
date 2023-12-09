@@ -110,6 +110,7 @@ const Navbar = () => {
               </div>
               <button disabled={ loading } class="btn btn-primary" onClick={ handleClick } type="submit" >Login</button>
               { error && <span>{ error.message }</span> }
+              <button  cLass="btn btn-outline-dark" onClick={ handleClick } type="button">Register</button>
             </form>
           </div>
         }
