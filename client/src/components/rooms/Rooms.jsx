@@ -91,7 +91,7 @@ const Rooms = () => {
             : <img src="../../public/quadruple.jpeg" className='image' alt="..." />
         }
         { rooms && rooms.map((room) => (
-          <div className='reservation'>
+          <div className='reservation' key={window.crypto.randomUUID()}>
             <div>
               <p >Room number: { room.roomNumber }</p>
               <p >{ room.type }</p>
@@ -103,7 +103,7 @@ const Rooms = () => {
               <span>
                 { `from ${startDate} to ${endDate}` }
               </span>
-              <button type="button" class="btn btn-outline-success btn-lg"
+              <button type="button" className="btn btn-outline-success btn-lg"
                 onClick={ () => createReservation(room.roomNumber, room._id) }>
                 Book
               </button>

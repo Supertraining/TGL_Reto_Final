@@ -18,7 +18,7 @@ const Navbar = () => {
     navigate('/')
   }
 
-  const [credentials, setCredentials] = useState({
+  const [ credentials, setCredentials ] = useState({
     username: undefined,
     password: undefined,
   });
@@ -26,7 +26,7 @@ const Navbar = () => {
   const { user, loading, error, dispatch } = useContext(AuthContext);
 
   const handleChange = (e) => {
-    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }))
+    setCredentials((prev) => ({ ...prev, [ e.target.id ]: e.target.value }))
   }
 
   const handleClick = async () => {
@@ -43,7 +43,7 @@ const Navbar = () => {
     }
   }
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
 
   const clickRegister = () => {
     setIsModalOpen(true)
@@ -89,19 +89,19 @@ const Navbar = () => {
           </div>
         </div>
 
-        {isModalOpen && (
-          <RegisterForm isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-        )}
+        { isModalOpen && (
+          <RegisterForm isModalOpen={ isModalOpen } setIsModalOpen={ setIsModalOpen } />
+        ) }
 
-        {user
+        { user
           ? <div className='userinfo'>
-            {user.username}
+            { user.username }
             <Link to='/user-info' className='myReservations'>
               <p className="myReservation">My reservations</p>
             </Link>
             <button
               className='logout-btn'
-              onClick={() => handleLogout()}>
+              onClick={ () => handleLogout() }>
               Logout
             </button>
           </div>
@@ -113,18 +113,22 @@ const Navbar = () => {
             <form className="dropdown-menu p-1 col-3" >
               <div className="mb-3">
                 <label htmlFor="username" className="form-label">Username</label>
-                <input type="email" className="form-control-lg" id="username" placeholder="username"
-                  onChange={handleChange} />
+                <input type="email" className="form-control-lg" id="username" placeholder="username" autoComplete='username'
+                  onChange={ handleChange } />
               </div>
               <div className="mb-3">
-                <label htmlFor="password" className="form-label">Password</label>
-                <input type="password" className="form-control-lg" id="password" placeholder="Password"
-                  onChange={handleChange} />
+                <label htmlFor="password" className="form-label" >Password</label>
+                <input type="password" className="form-control-lg" id="password" placeholder="Password" autoComplete='current-password'
+                  onChange={ handleChange } />
+                <div className='text-center text-danger'>
+                  { error && <small>{ error }</small> }
+                </div>
+                
               </div>
               <div className='d-flex justify-content-center'>
-                <button disabled={loading} className="btn btn-primary" onClick={handleClick} type="submit" >Login</button>
-                {error && <span>{error.message}</span>}
-                <button className="btn btn-outline-dark " onClick={clickRegister} type="button">Register</button>
+                <button disabled={ loading } className="btn btn-primary" onClick={ handleClick } type="submit" >Login</button>
+
+                <button className="btn btn-outline-dark " onClick={ clickRegister } type="button">Register</button>
               </div>
 
             </form>

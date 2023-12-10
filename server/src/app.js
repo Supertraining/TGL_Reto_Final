@@ -1,18 +1,25 @@
 const express = require('express');
 const app = express();
-const UserRouter = require('./users/routes/user')
-const RoomRouter = require('./rooms/routes/room')
+const UserRouter = require('./apis/users/routes/user')
+const RoomRouter = require('./apis/rooms/routes/room')
 const cors = require('cors')
 const helmet = require('helmet')
+const rateLimit = require('express-rate-limit')
 const errorHandler = require('./middlewares/error.handler')
 const logHandler = require('./utils/logger.handler')
 const nonExistentRoute = require('./middlewares/routeValidation')
 
 const userRoutes = new UserRouter();
 const roomRoutes = new RoomRouter();
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: 'Too many requests, try again in 15 minutes'
+});
 
 app.use(helmet());
 app.use(cors());
+app.use(limiter);
 app.use(express.json());
 app.use(logHandler.accessLogger);
 
@@ -21,6 +28,6 @@ app.use('/api/room', roomRoutes.getRouter());
 
 app.use(nonExistentRoute);
 
-app.use(errorHandler)
+app.use(errorHandler);
 
 module.exports = app;

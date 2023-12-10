@@ -1,19 +1,18 @@
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import React from 'react';
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './userinfo.css';
 import axios from 'axios';
 
 const Userinfo = () => {
 
-    const navigate = useNavigate()
     const { user } = useContext(AuthContext);
     const [userData, setUserData] = useState('');
 
     useEffect(() => {
+
         const fetchUserData = async () => {
             try {
                 const response = await axios.get(`http://localhost:3000/api/user/${user.id}`, {

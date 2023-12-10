@@ -30,13 +30,8 @@
 .headerListItem > .text {
   font-size: clamp(0.5rem, 1rem, 1.2rem);
 }
-/* .headerListItem.active {
-  border: 1px solid white;
-  padding: 10px;
-  border-radius: 20px;
-} */
 
-@media (max-width: 576px) {
+@media (max-width: 1055px) {
   .navContainer {
     width: 100%;
     max-width: 1024px;
@@ -94,10 +89,15 @@
 .img {
   filter: invert(1);
   display: flex;
-  width: 5vw;
-  height: 5vw;
+  width: 5vw !important;
+  height: 5vw !important;
 }
-
+@media (max-width: 576px) {
+  .img {
+    width: 10vw !important;
+    height: 10vw !important;
+  }
+}
 #links {
   color: white;
   text-decoration: none;
@@ -131,18 +131,18 @@
   }
 }
 
-.userinfo{
+.userinfo {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.myReservation{
+.myReservation {
   margin: 2px;
   padding: 0.2rem;
   display: flex;
   justify-content: center;
 }
-.myReservation:hover{
+.myReservation:hover {
   border: 1px solid white;
   border-radius: 0.5rem;
 }

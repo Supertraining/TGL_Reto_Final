@@ -1,5 +1,4 @@
 import MainRooms from '../components/rooms/MainRooms'
-import Rooms from '../components/rooms/Rooms'
 import './home.css'
 import Header from '../components/header/Header'
 
@@ -14,9 +13,6 @@ const Home = () => {
       <div className="homeContainer">
         <Header/>
         <MainRooms/>
-
-        {/* <Rooms /> */}
-      
       </div>
 
     </div>

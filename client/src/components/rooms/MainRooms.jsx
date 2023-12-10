@@ -36,27 +36,25 @@ const MainRooms = () => {
 
   const selectedDates = getDatesInRange(dates[ 0 ].startDate, dates[ 0 ].endDate);
 
-  const [noRoomsAvailable, setNoRoomsAvailable] = useState(false);
+  const [ noRoomsAvailable, setNoRoomsAvailable ] = useState(false);
 
   const availableRooms = async (type) => {
-    
+
     try {
 
       if (selectedDates.length === 1) {
         setIsModalOpen(true);
         return;
       }
-  
+
       const rooms = await axios.post('http://localhost:3000/api/room/availability', { selectedDates: selectedDates, type: type })
-      console.log(rooms)
+
       if (rooms.data === null) {
         setNoRoomsAvailable(true);
         return;
       }
 
-      rooms
-        ? navigate('/available-rooms', { state: { rooms: rooms.data, selectedDates: selectedDates } })
-        : rooms.data
+      navigate('/available-rooms', { state: { rooms: rooms.data, selectedDates: selectedDates } })
 
     } catch (error) {
       console.log(error);
@@ -101,37 +99,39 @@ const MainRooms = () => {
         />
       </div>
 
-      {isModalOpen && (
+      { isModalOpen && (
         <div className='modal-overlay'>
           <div className='modal-content'>
             <p>Select at least two dates</p>
-            <button onClick={() => setIsModalOpen(false)}>OK</button>
+            <button onClick={ () => setIsModalOpen(false) }>OK</button>
           </div>
         </div>
-      )}
+      ) }
 
       <div className='card-container'>
 
         { habitaciones && habitaciones.map((habitacion) => (
-          <div className='roomCard' style={{ display: 'flex', alignItems: 'center' }} key={ window.crypto.randomUUID() }>
-           <div className="card mb-3" style={ { width: '50%' } }>
+          <div className='roomCard' key={ window.crypto.randomUUID() }>
+            <div className="card mb-3">
               <img src={ habitacion.img } className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title">{ habitacion.type }</h5>
                 <p className="card-text">{ habitacion.description }</p>
                 <p className="card-text"><small className="text-body-secondary">{ habitacion.price }</small></p>
               </div>
+
+              <div className='btn-rooms'>
+                { noRoomsAvailable && <p className='errorRoom'>There´s no available rooms for this dates.</p> }
+                <button
+                  className='card-btn'
+                  onClick={ () => availableRooms(habitacion.type) }
+                  disabled={ noRoomsAvailable }>
+                  Check Available Rooms
+                </button>
+              </div>
             </div>
 
-            <div className='btn-rooms'>
-            {noRoomsAvailable && <p className='errorRoom'>There's no available rooms for this dates.</p>}
-              <button
-                className='card-btn'
-                onClick={ () => availableRooms(habitacion.type) }
-                disabled={noRoomsAvailable}>
-                Check Available Rooms
-              </button>
-            </div>
+
 
           </div>
         )) }

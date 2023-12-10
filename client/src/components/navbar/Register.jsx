@@ -21,7 +21,6 @@ const RegisterForm = ({ setIsModalOpen }) => {
       ...formData,
       [ e.target.name ]: e.target.value,
     });
-    console.log(formData)
   };
 
   const handleSubmit = async (e) => {
@@ -78,6 +77,7 @@ const RegisterForm = ({ setIsModalOpen }) => {
               placeholder="Fullname"
               onChange={ handleChange }
               value={ formData.fullname }
+              autoComplete='on'
             />
             <input
               className='username'
@@ -86,14 +86,16 @@ const RegisterForm = ({ setIsModalOpen }) => {
               placeholder="Username"
               onChange={ handleChange }
               value={ formData.username }
+              autoComplete='username'
             />
             <input
               className='password'
-              type="text"
+              type="password"
               name="password"
               placeholder="Password"
               onChange={ handleChange }
               value={ formData.password }
+              autoComplete='new-password'
             />
           </div>
           <button type='submit'>Register</button>
