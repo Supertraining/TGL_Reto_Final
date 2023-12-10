@@ -36,6 +36,8 @@ const MainRooms = () => {
 
   const selectedDates = getDatesInRange(dates[ 0 ].startDate, dates[ 0 ].endDate);
 
+  const [noRoomsAvailable, setNoRoomsAvailable] = useState(false);
+
   const availableRooms = async (type) => {
     
     try {
@@ -46,6 +48,11 @@ const MainRooms = () => {
       }
   
       const rooms = await axios.post('http://localhost:3000/api/room/availability', { selectedDates: selectedDates, type: type })
+      console.log(rooms)
+      if (rooms.data === null) {
+        setNoRoomsAvailable(true);
+        return;
+      }
 
       rooms
         ? navigate('/available-rooms', { state: { rooms: rooms.data, selectedDates: selectedDates } })
@@ -86,7 +93,7 @@ const MainRooms = () => {
         <h3>Select a date</h3>
         <DateRange
           editableDateInputs={ true }
-          onChange={ (item) => setDates([ item.selection ]) }
+          onChange={ (item) => setDates([ item.selection ], setNoRoomsAvailable(false)) }
           moveRangeOnFirstSelection={ false }
           ranges={ dates }
           className='date'
@@ -116,10 +123,12 @@ const MainRooms = () => {
               </div>
             </div>
 
-            <div>
+            <div className='btn-rooms'>
+            {noRoomsAvailable && <p className='errorRoom'>There's no available rooms for this dates.</p>}
               <button
                 className='card-btn'
-                onClick={ () => availableRooms(habitacion.type) }>
+                onClick={ () => availableRooms(habitacion.type) }
+                disabled={noRoomsAvailable}>
                 Check Available Rooms
               </button>
             </div>

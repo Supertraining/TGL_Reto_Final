@@ -56,7 +56,7 @@ const Userinfo = () => {
 
     return (
         <div className='usercontainer'>
-            <Link to="/">
+            <Link to="/" className='back'>
                 {" "}
                 <span>
                     Back
@@ -66,9 +66,9 @@ const Userinfo = () => {
                 <div>
                     <h1 className='welcome'>Welcome, {userData.fullname}</h1>
                 </div>
+                    <h2 className='text'> Your Reservations</h2>
                 <div className='containerreservations'>
 
-                    <h2 className='text'> Your Reservations</h2>
                     {userData && userData.myReservations.length > 0 ? (
                         // Si el usuario tiene reservas, muestra las reservas
                         userData.myReservations.map((reservation) => (

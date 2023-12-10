@@ -1,7 +1,7 @@
 .usercontainer{
     background-color: #121B25;
     color: aliceblue;
-    height: 100vh;
+    padding: 1.2%;
 }
 
 a{
@@ -14,11 +14,22 @@ p{
 }
 
 .reservations{
-    display: flex;
+    /* display: flex; */
     justify-content: space-evenly;
     border: 1px solid white;
     border-radius: 1rem;
     padding: 1rem;
     align-items: center;
-    margin: 2rem;
+    margin: 1rem;
+    width: 80%;
+}
+
+.containerreservations{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome{
+    margin: 1rem;
 }
