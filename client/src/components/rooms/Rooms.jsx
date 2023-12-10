@@ -2,7 +2,7 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import axios from 'axios';
 import { Link, useLocation } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import './rooms.css'
 import { useNavigate } from 'react-router-dom';
@@ -12,10 +12,17 @@ const Rooms = () => {
   const { state } = useLocation()
   const { user } = useContext(AuthContext);
   const { rooms, selectedDates } = state || {}
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
 
   const navigate = useNavigate()
 
   const createReservation = async (roomNumber, roomId) => {
+    console.log(user, 'user en createReservation')
+
+    if (user === null) {
+      setIsModalOpen(true);
+        return;
+    }
 
     const roomResponse = await axios.put('http://localhost:3000/api/room/reservation', { selectedDates: selectedDates, roomId: roomId },
       {
@@ -67,6 +74,15 @@ const Rooms = () => {
             Back
           </span>
         </Link>
+
+        {isModalOpen && (
+        <div className='modal-overlay'>
+          <div className='modal-content'>
+            <p>Login or register first</p>
+            <button onClick={() => setIsModalOpen(false)}>OK</button>
+          </div>
+        </div>
+      )}
 
       <h1>{ rooms[ 0 ].type } Room</h1>
       <div className='container'>

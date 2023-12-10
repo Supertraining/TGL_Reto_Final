@@ -5,14 +5,17 @@ import { AuthContext } from '../../context/AuthContext';
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 import RegisterForm from './Register';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
 
   //const { user, dispatch } = useContext(AuthContext);
-
+  const navigate = useNavigate()
+  
   const handleLogout = () => {
     localStorage.removeItem('user')
     dispatch({ type: 'LOGOUT' })
+    navigate('/')
   }
 
   const [credentials, setCredentials] = useState({

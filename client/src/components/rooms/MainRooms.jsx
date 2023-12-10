@@ -50,8 +50,6 @@ const MainRooms = () => {
       rooms
         ? navigate('/available-rooms', { state: { rooms: rooms.data, selectedDates: selectedDates } })
         : rooms.data
-  
-      console.log(rooms.data);
 
     } catch (error) {
       console.log(error);
