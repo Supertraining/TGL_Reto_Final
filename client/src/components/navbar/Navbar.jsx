@@ -11,7 +11,7 @@ const Navbar = () => {
 
   //const { user, dispatch } = useContext(AuthContext);
   const navigate = useNavigate()
-  
+
   const handleLogout = () => {
     localStorage.removeItem('user')
     dispatch({ type: 'LOGOUT' })
@@ -94,10 +94,10 @@ const Navbar = () => {
         )}
 
         {user
-          ? <div>
+          ? <div className='userinfo'>
             {user.username}
             <Link to='/user-info' className='myReservations'>
-              <p className="logo">My reservations</p>
+              <p className="myReservation">My reservations</p>
             </Link>
             <button
               className='logout-btn'
