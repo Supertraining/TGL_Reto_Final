@@ -75,7 +75,7 @@ const RegisterForm = ({ setIsModalOpen }) => {
               className='fullname'
               type="text"
               name="fullname"
-              placeholder="fullname"
+              placeholder="Fullname"
               onChange={ handleChange }
               value={ formData.fullname }
             />
@@ -83,7 +83,7 @@ const RegisterForm = ({ setIsModalOpen }) => {
               className='username'
               type="text"
               name="username"
-              placeholder="username"
+              placeholder="Username"
               onChange={ handleChange }
               value={ formData.username }
             />
@@ -91,7 +91,7 @@ const RegisterForm = ({ setIsModalOpen }) => {
               className='password'
               type="text"
               name="password"
-              placeholder="password"
+              placeholder="Password"
               onChange={ handleChange }
               value={ formData.password }
             />

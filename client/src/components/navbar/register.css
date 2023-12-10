@@ -1,0 +1,21 @@
+.inputsform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fullname{
+    margin: 1rem;
+    padding: 0.3rem;
+    border-radius: 10px;
+}
+.username {
+    margin: 1rem;
+    padding: 0.3rem;
+    border-radius: 10px;
+}
+.password{
+    margin: 1rem;
+    padding: 0.3rem;
+    border-radius: 10px;
+}
