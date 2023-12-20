@@ -65,20 +65,20 @@ const MainRooms = () => {
     {
       "img": "../../public/simple.jpeg",
       "type": "Single",
-      "description": "Welcome to our hotel room, where comfort meets simplicity. Neutral walls and soft lighting create a relaxing atmosphere. The queen-size bed is adorned with comfortable bedding, and bedside tables with lamps provide a cozy space. Enjoy the convenience of a desk, a television, and a clean bathroom with everything you need. Your temporary home awaits you with warmth and functionality. Welcome to your relaxing stay!",
-      "price": "USD 20",
+      "description": "Explore Single Room Comfort: Discover a range of single rooms tailored to your preferences. From the intimate Single Deluxe Room with a jacuzzi to the spacious Single Family Suite with a kitchenette, each room offers a unique blend of comfort and style. Enjoy city views, premium amenities, and personalized service. Your ideal single room experience awaits!",
+      "price": "Prices range from $90 to $170 per night",
     },
     {
       "img": "../../public/doble.jpeg",
       "type": "Double",
-      "description": "Welcome to our inviting room with two beds, where comfort and convenience blend seamlessly. The neutral walls and soothing lighting establish a calming ambiance. Both queen-size beds are adorned with cozy bedding, while bedside tables and lamps create a warm and comfortable setting. Whether you're traveling with a companion or need extra space for yourself, this room offers the perfect balance of relaxation and functionality. Enjoy the practicality of a desk, a television, and a well-equipped bathroom. Your temporary haven beckons you with a welcoming atmosphere. Welcome to a delightful stay for two!",
-      "price": "USD 35",
+      "description": "Discover Luxury for Two:  Explore our curated collection of double rooms, each designed for the ultimate comfort of two guests. From the lavish Double Deluxe Room with a jacuzzi to the spacious Double Family Suite with a kitchenette, every room offers a unique blend of luxury and convenience. Indulge in panoramic city views, premium amenities, and personalized service. For an unforgettable experience designed just for you and your companion. Your ideal double room retreat awaits!",
+      "price": "Prices range from $120 to $200 per night",
     },
     {
       "img": "../../public/quadruple.jpeg",
       "type": "Quadruple",
-      "description": "Step into our spacious room with four beds, a perfect retreat for group travelers or families. The neutral décor and gentle lighting set the tone for a serene atmosphere. The comfortable bedding on each bed ensures a restful night's sleep, and bedside tables with lamps provide a cozy touch. Whether you're traveling with family or friends, this room offers ample space and comfort for everyone. Take advantage of the convenience of a desk, multiple televisions, and a well-appointed bathroom with all the essentials. Your temporary sanctuary awaits, offering both warmth and practicality. Welcome to a relaxing stay for all!",
-      "price": "USD 50",
+      "description": "Luxurious Quad Accommodations: Discover our exclusive collection of quad rooms, each meticulously crafted to provide unparalleled comfort for groups of four. From the opulent Quad Deluxe Room with panoramic city views to the spacious Quad Family Suite equipped with a kitchenette, each accommodation promises a unique blend of luxury and functionality. Immerse yourself in premium amenities, personalized service. Your perfect quad room getaway awaits!!",
+      "price": "prices ranging from $180 to $280 per night"
     },
   ]
 

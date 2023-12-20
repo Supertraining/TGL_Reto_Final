@@ -39,8 +39,14 @@ const Navbar = () => {
       dispatch({ type: 'LOGIN_SUCCESS', payload: { ...userData, token: data } })
 
     } catch (err) {
-      dispatch({ type: 'LOGIN_FAILURE', payload: err.response.data })
+       
+      if (typeof err.response.data == 'string') {
+        dispatch({ type: 'LOGIN_FAILURE', payload: err.response.data })
+        return
+      }
+      dispatch({ type: 'LOGIN_FAILURE', payload: err.response.data?.errors[ 0 ] })
     }
+    
   }
 
   const [ isModalOpen, setIsModalOpen ] = useState(false);
@@ -123,7 +129,7 @@ const Navbar = () => {
                 <div className='text-center text-danger'>
                   { error && <small>{ error }</small> }
                 </div>
-                
+
               </div>
               <div className='d-flex justify-content-center'>
                 <button disabled={ loading } className="btn btn-primary" onClick={ handleClick } type="submit" >Login</button>
