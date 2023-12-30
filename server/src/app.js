@@ -8,6 +8,8 @@ const rateLimit = require('express-rate-limit')
 const errorHandler = require('./middlewares/error.handler')
 const logHandler = require('./utils/logger.handler')
 const nonExistentRoute = require('./middlewares/routeValidation')
+require('dotenv').config();
+
 
 const userRoutes = new UserRouter();
 const roomRoutes = new RoomRouter();
@@ -18,7 +20,10 @@ const limiter = rateLimit({
 });
 
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: [ process.env.CLIENT_PROD_URL,  process.env.CLIENT_DEV_URL ],
+  credentials: true
+}));
 app.use(limiter);
 app.use(express.json());
 app.use(logHandler.accessLogger);
