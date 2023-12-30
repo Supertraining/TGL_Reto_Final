@@ -3,7 +3,7 @@ import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRange } from 'react-date-range';
 import { useState } from 'react'
-import axios from 'axios';
+import axios from '../../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
 const MainRooms = () => {
@@ -47,7 +47,7 @@ const MainRooms = () => {
         return;
       }
 
-      const rooms = await axios.post('http://localhost:3000/api/room/availability', { selectedDates: selectedDates, type: type })
+      const rooms = await axios.post('/api/room/availability', { selectedDates: selectedDates, type: type })
 
       if (rooms.data === null) {
         setNoRoomsAvailable(true);

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../utils/axiosInstance';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { jwtDecode } from "jwt-decode";
@@ -21,7 +21,7 @@ const Login = () => {
 
         dispatch({ type: 'LOGIN_START' });
         try {
-            const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
+            const { data } = await axios.post('/api/user/login', credentials)
             const userData = jwtDecode(data);
             console.log(userData)
             dispatch({ type: 'LOGIN_SUCCESS', payload: userData })

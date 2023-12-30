@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './userinfo.css';
-import axios from 'axios';
+import axios from '../../utils/axiosInstance';
 
 const Userinfo = () => {
 
@@ -15,7 +15,7 @@ const Userinfo = () => {
 
         const fetchUserData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/user/${user.id}`, {
+                const response = await axios.get(`/api/user/${user.id}`, {
                     headers: {
                         Authorization: user.token
                     }

@@ -1,5 +1,5 @@
 import './register.css';
-import axios from 'axios';
+import axios from '../../utils/axiosInstance';
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { jwtDecode } from "jwt-decode";
@@ -13,7 +13,6 @@ const RegisterForm = ({ setIsModalOpen }) => {
     fullname: undefined,
     username: undefined,
     password: undefined,
-    //role: 'user', Pao aca no hace falta poner este campo, en el back lo hace por default
   });
 
   const handleChange = (e) => {
@@ -39,7 +38,7 @@ const RegisterForm = ({ setIsModalOpen }) => {
 
     try {
 
-      const response = await axios.post('http://localhost:3000/api/user/register', formData);
+      const response = await axios.post('/api/user/register', formData);
 
       if (response) {
         console.log('LOGIN SUCCESSFUL!!')
@@ -50,7 +49,7 @@ const RegisterForm = ({ setIsModalOpen }) => {
 
       const credentials = { username: formData.username, password: formData.password }
 
-      const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
+      const { data } = await axios.post('/api/user/login', credentials)
       const userData = jwtDecode(data);
 
       dispatch({ type: 'LOGIN_SUCCESS', payload: { ...userData, token: data } })

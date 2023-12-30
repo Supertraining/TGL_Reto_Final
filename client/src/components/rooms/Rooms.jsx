@@ -1,6 +1,6 @@
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import axios from 'axios';
+import axios from '../../utils/axiosInstance';
 import { Link, useLocation } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
@@ -24,14 +24,14 @@ const Rooms = () => {
         return;
     }
 
-    const roomResponse = await axios.put('http://localhost:3000/api/room/reservation', { selectedDates: selectedDates, roomId: roomId },
+    const roomResponse = await axios.put('/api/room/reservation', { selectedDates: selectedDates, roomId: roomId },
       {
         headers: {
           Authorization: user.token
         }
       });
 
-    const userResponse = await axios.patch(`http://localhost:3000/api/user/reservation/${user.id}`, {
+    const userResponse = await axios.patch(`/api/user/reservation/${user.id}`, {
       reservationId: window.crypto.randomUUID(),
       roomNumber: roomNumber,
       selectedDates: selectedDates

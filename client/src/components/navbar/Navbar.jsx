@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { jwtDecode } from "jwt-decode";
-import axios from 'axios';
+import axios from '../../utils/axiosInstance';
 import RegisterForm from './Register';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ const Navbar = () => {
 
     dispatch({ type: 'LOGIN_START' });
     try {
-      const { data } = await axios.post('http://localhost:3000/api/user/login', credentials)
+      const { data } = await axios.post('/api/user/login', credentials)
       const userData = jwtDecode(data);
 
       dispatch({ type: 'LOGIN_SUCCESS', payload: { ...userData, token: data } })
