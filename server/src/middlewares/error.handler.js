@@ -20,12 +20,10 @@ const error = (err, req, res, next) => {
     return res.status(errorStatus).send(errorMessage)
 
   } catch (error) {
-
+    
     logHandler.errorLogger(error)
 
   }
-
-
 
 }
 

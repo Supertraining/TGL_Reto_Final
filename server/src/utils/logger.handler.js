@@ -17,8 +17,8 @@ morgan.token('userAgent', function (req, res) {
   } catch (error) {
 
     console.error(chalk.red.bold('Error occurred, check error.log file for more details'));
-    errorLogStream.write(error.stack)
-
+    errorLogStream.write(error.stack);
+    throw error;
   }
 
 });
@@ -31,8 +31,8 @@ morgan.token('ip', function (req, res) {
   } catch (error) {
 
     console.error(chalk.red.bold('Error occurred, check error.log file for more details'));
-    errorLogStream.write(error.stack)
-
+    errorLogStream.write(error.stack);
+    throw error;
   }
 
 });
@@ -45,8 +45,9 @@ morgan.token('user', function (req, res) {
   } catch (error) {
 
     console.error(chalk.red.bold('Error occurred, check error.log file for more details'));
-    errorLogStream.write(error.stack)
-
+    errorLogStream.write(error.stack);
+    throw error;
+    
   }
 });
 
@@ -80,8 +81,8 @@ Stack Trace: ${err.stack}\n\n`;
     } catch (error) {
 
       console.error(chalk.red.bold('Error occurred, check error.log file for more details'));
-      errorLogStream.write(error.stack)
-
+      errorLogStream.write(error.stack);
+      throw error;
     }
   },
 
