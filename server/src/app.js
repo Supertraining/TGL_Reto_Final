@@ -1,5 +1,4 @@
 const express = require('express');
-const app = express();
 const UserRouter = require('./apis/users/routes/user')
 const RoomRouter = require('./apis/rooms/routes/room')
 const cors = require('cors')
@@ -10,11 +9,15 @@ const logHandler = require('./utils/logger.handler')
 const nonExistentRoute = require('./middlewares/routeValidation')
 require('dotenv').config();
 
+const app = express();
+
+app.set('trust proxy', 1)
+app.get('/ip', (request, response) => response.send(request.ip))
+app.get('/x-forwarded-for', (request, response) => response.send(request.headers['x-forwarded-for']))
 
 const userRoutes = new UserRouter();
 const roomRoutes = new RoomRouter();
 const limiter = rateLimit({
-  xForwardedForHeader: true,
   windowMs: 15 * 60 * 1000,
   max: 100,
   message: 'Too many requests, try again in 15 minutes'
