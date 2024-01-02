@@ -14,7 +14,7 @@ require('dotenv').config();
 const userRoutes = new UserRouter();
 const roomRoutes = new RoomRouter();
 const limiter = rateLimit({
-  xForwardedForHeader: false,
+  xForwardedForHeader: true,
   windowMs: 15 * 60 * 1000,
   max: 100,
   message: 'Too many requests, try again in 15 minutes'
