@@ -8,21 +8,31 @@ services:
   #   depends_on:
   #     - postgres-tgl
   postgres-tgl:
-      image: "postgres"
-      container_name: postgres-tgfinalchallenge
-      ports:
-        - "5433:5432"
-      environment:
-        POSTGRES_USER: topgunteam
-        POSTGRES_PASSWORD: topgunteam
-        POSTGRES_DATABASES: topgunteam
-
+    image: 'postgres'
+    container_name: postgres-tgfinalchallenge
+    ports:
+      - '5433:5432'
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_DATABASE}
+      POSTGRES_DATABASES: ${PG_PASSWORD}
+  mongo-tgl:
+    image: 'mongo'
+    container_name: mongo-tgfinalchallenge
+    ports:
+      - '27017:27017'
+    env_file:
+      - .env
+    environment:
+      MONGO_URI: ${MONGO_URL}
 # docker ps
 
 #Crear volumen
 # docker volume create postgresData
-#Iniciar su docker compose 
-  # Ubicarse en la ruta donde este el archivo docker-compose.yml
+#Iniciar su docker compose
+# Ubicarse en la ruta donde este el archivo docker-compose.yml
 # docker-compose -p postgresTGL up -d
 
 #Detener
