@@ -97,6 +97,9 @@
 .card-dates-container button {
   margin: 0rem !important;
 }
+.card-dates-container h3 {
+  font-size: clamp(0.8rem, 3vw, 1rem);
+}
 
 .errorRoom {
   color: red;
@@ -111,6 +114,11 @@
 .rdrCalendarWrapper {
   border-radius: 0.375rem !important;
   width: 60%;
+}
+@media (max-width: 762px) {
+  .rdrCalendarWrapper {
+    width: 80%;
+  }
 }
 .rdrMonth {
   width: 100% !important;
