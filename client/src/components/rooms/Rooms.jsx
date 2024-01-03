@@ -21,7 +21,7 @@ const Rooms = () => {
 
     if (user === null) {
       setIsModalOpen(true);
-        return;
+      return;
     }
 
     const roomResponse = await axios.put('/api/room/reservation', { selectedDates: selectedDates, roomId: roomId },
@@ -59,7 +59,7 @@ const Rooms = () => {
     });
 
   const endDate = selectedDates && selectedDates.length > 0
-    && new Date(selectedDates[selectedDates.length-1]).toLocaleDateString('es-AR', {
+    && new Date(selectedDates[ selectedDates.length - 1 ]).toLocaleDateString('es-AR', {
       day: 'numeric',
       month: 'numeric',
       year: 'numeric'
@@ -68,30 +68,30 @@ const Rooms = () => {
 
   return (
     <div className='ARooms'>
-        <Link to="/" className='back'>
-          { " " }
-          <span>
-            Back
-          </span>
-        </Link>
+      <Link to="/" className='back'>
+        { " " }
+        <span>
+          Back
+        </span>
+      </Link>
 
-        {isModalOpen && (
+      { isModalOpen && (
         <div className='modal-overlay'>
           <div className='modal-content'>
             <p>Login or register first</p>
-            <button onClick={() => setIsModalOpen(false)}>OK</button>
+            <button onClick={ () => setIsModalOpen(false) }>OK</button>
           </div>
         </div>
-      )}
+      ) }
 
       <h1>{ rooms[ 0 ].type } Room</h1>
       <div className='container'>
-        { rooms && rooms[ 0 ].type === 'Single' ? <img src="../../public/simple.jpeg" className='image' alt="..." />
-          : rooms[ 0 ].type === 'Double' ? <img src="../../public/doble.jpeg" className='image' alt="..." />
-            : <img src="../../public/quadruple.jpeg" className='image' alt="..." />
+        { rooms && rooms[ 0 ].type === 'Single' ? <img src="https://res.cloudinary.com/marangadev/image/upload/v1704225992/TG-Hotel/simple_eyiufj.webp" className='image' alt="..." />
+          : rooms[ 0 ].type === 'Double' ? <img src="https://res.cloudinary.com/marangadev/image/upload/v1704226076/TG-Hotel/doble_mjno2f.webp" className='image' alt="..." />
+            : <img src="https://res.cloudinary.com/marangadev/image/upload/v1704225992/TG-Hotel/quadruple_cozsqn.webp" className='image' alt="..." />
         }
         { rooms && rooms.map((room) => (
-          <div className='reservation' key={window.crypto.randomUUID()}>
+          <div className='reservation' key={ window.crypto.randomUUID() }>
             <div>
               <p >Room number: { room.roomNumber }</p>
               <p >{ room.type }</p>

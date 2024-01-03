@@ -102,21 +102,21 @@ useEffect(() => {
 
       <div className='card-container'>
 
-        { mainRooms && mainRooms.map((habitacion) => (
+        { mainRooms && mainRooms.map((room) => (
           <div className='roomCard' key={ window.crypto.randomUUID() }>
             <div className="card mb-3">
-              <img src={ habitacion.thumbnail } className="card-img-top" alt="..." />
+              <img src={ room.thumbnail } className="card-img-top" alt="..." />
               <div className="card-body">
-                <h5 className="card-title">{ habitacion.type }</h5>
-                <p className="card-text">{ habitacion.description }</p>
-                <p className="card-text"><small className="text-body-secondary">{ habitacion.price }</small></p>
+                <h5 className="card-title">{ room.type }</h5>
+                <p className="card-text">{ room.description }</p>
+                <p className="card-text"><small className="text-body-secondary">{ room.price }</small></p>
               </div>
 
               <div className='btn-rooms'>
                 { noRoomsAvailable && <p className='errorRoom'>There´s no available rooms for this dates.</p> }
                 <button
                   className='card-btn'
-                  onClick={ () => availableRooms(habitacion.type) }
+                  onClick={ () => availableRooms(room.type) }
                   disabled={ noRoomsAvailable }>
                   Check Available Rooms
                 </button>
