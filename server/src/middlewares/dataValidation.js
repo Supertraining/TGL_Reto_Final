@@ -87,7 +87,7 @@ module.exports = {
         }
         return true;
       }),
-    
+
     body('type')
       .exists().withMessage('type is required')
       .trim()
@@ -101,6 +101,31 @@ module.exports = {
       .exists().withMessage('RoomNumber is required')
       .trim()
       .notEmpty().withMessage('RoomNumber cannot be empty'),
+
+    body('type')
+      .exists().withMessage('type is required')
+      .trim()
+      .notEmpty().withMessage('Type cannot be empty')
+      .isIn([ 'Single', 'Double', 'Quadruple' ]).withMessage('Invalid room type'),
+
+    body('description')
+      .exists().withMessage('Description is required')
+      .trim()
+      .notEmpty().withMessage('Description cannot be empty'),
+
+    body('price')
+      .exists().withMessage('Price is required')
+      .trim()
+      .notEmpty().withMessage('Price cannot be empty'),
+
+    handleValidationErrors
+
+  ],
+  mainRoom: [
+    body('thumbnail')
+      .exists().withMessage('thumbnail is required')
+      .trim()
+      .notEmpty().withMessage('thumbnail cannot be empty'),
 
     body('type')
       .exists().withMessage('type is required')

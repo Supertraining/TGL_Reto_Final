@@ -1,6 +1,7 @@
 const express = require('express');
 const UserRouter = require('./apis/users/routes/user')
 const RoomRouter = require('./apis/rooms/routes/room')
+const MainRoomRouter = require('./apis/mainRooms/routes/mainRooms')
 const cors = require('cors')
 const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
@@ -12,11 +13,10 @@ require('dotenv').config();
 const app = express();
 
 app.set('trust proxy', 1)
-app.get('/ip', (request, response) => response.send(request.ip))
-app.get('/x-forwarded-for', (request, response) => response.send(request.headers['x-forwarded-for']))
 
 const userRoutes = new UserRouter();
 const roomRoutes = new RoomRouter();
+const mainRoomRoutes = new MainRoomRouter();
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
@@ -34,6 +34,7 @@ app.use(logHandler.accessLogger);
 
 app.use('/api/user', userRoutes.getRouter());
 app.use('/api/room', roomRoutes.getRouter());
+app.use('/api/mainRoom', mainRoomRoutes.getRouter());
 
 app.use(nonExistentRoute);
 

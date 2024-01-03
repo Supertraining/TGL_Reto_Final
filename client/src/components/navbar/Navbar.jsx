@@ -60,7 +60,7 @@ const Navbar = () => {
       <div className='navContainer'>
         <Link to='/' className='homeLink'>
           <span className="logo">TOP GUN LAB HOTEL</span>
-          <img src='../../../public/Hotel2.png' className='img' alt="Top Gun Hotel logo" />
+          <img src='https://res.cloudinary.com/marangadev/image/upload/v1704226075/TG-Hotel/hotel2_rqznxx.webp' className='img' alt="Top Gun Hotel logo" />
         </Link>
 
         <div className='headerList'>

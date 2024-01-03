@@ -2,11 +2,15 @@ import './mainRooms.css';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRange } from 'react-date-range';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from '../../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
 const MainRooms = () => {
+
+useEffect(() => {
+  getMainrooms()
+}, [])
 
   const navigate = useNavigate()
 
@@ -17,8 +21,8 @@ const MainRooms = () => {
       key: 'selection',
     },
   ]);
-
   const [ isModalOpen, setIsModalOpen ] = useState(false);
+  const [mainRooms, setMainRooms] = useState([])
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -37,6 +41,15 @@ const MainRooms = () => {
   const selectedDates = getDatesInRange(dates[ 0 ].startDate, dates[ 0 ].endDate);
 
   const [ noRoomsAvailable, setNoRoomsAvailable ] = useState(false);
+
+  const getMainrooms = async() => {
+    try {
+      const {data: mainRooms} = await axios.get('/api/mainRoom/');
+      setMainRooms(mainRooms);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const availableRooms = async (type) => {
 
@@ -61,34 +74,13 @@ const MainRooms = () => {
     }
   };
 
-  let habitaciones = [
-    {
-      "img": "../../public/simple.jpeg",
-      "type": "Single",
-      "description": "Explore Single Room Comfort: Discover a range of single rooms tailored to your preferences. From the intimate Single Deluxe Room with a jacuzzi to the spacious Single Family Suite with a kitchenette, each room offers a unique blend of comfort and style. Enjoy city views, premium amenities, and personalized service. Your ideal single room experience awaits!",
-      "price": "Prices range from $90 to $170 per night",
-    },
-    {
-      "img": "../../public/doble.jpeg",
-      "type": "Double",
-      "description": "Discover Luxury for Two:  Explore our curated collection of double rooms, each designed for the ultimate comfort of two guests. From the lavish Double Deluxe Room with a jacuzzi to the spacious Double Family Suite with a kitchenette, every room offers a unique blend of luxury and convenience. Indulge in panoramic city views, premium amenities, and personalized service. For an unforgettable experience designed just for you and your companion. Your ideal double room retreat awaits!",
-      "price": "Prices range from $120 to $200 per night",
-    },
-    {
-      "img": "../../public/quadruple.jpeg",
-      "type": "Quadruple",
-      "description": "Luxurious Quad Accommodations: Discover our exclusive collection of quad rooms, each meticulously crafted to provide unparalleled comfort for groups of four. From the opulent Quad Deluxe Room with panoramic city views to the spacious Quad Family Suite equipped with a kitchenette, each accommodation promises a unique blend of luxury and functionality. Immerse yourself in premium amenities, personalized service. Your perfect quad room getaway awaits!!",
-      "price": "prices ranging from $180 to $280 per night"
-    },
-  ]
-
   return (
     <div className='mainRooms-container'>
 
       <h1 className='titulo'>Our Rooms</h1>
 
       <div className='card-dates-container'>
-        <h3>Select a date</h3>
+        <h3>Select the dates in which you wish to reserve a room and check it`s availability by clicking on the button under it.</h3>
         <DateRange
           editableDateInputs={ true }
           onChange={ (item) => setDates([ item.selection ], setNoRoomsAvailable(false)) }
@@ -110,10 +102,10 @@ const MainRooms = () => {
 
       <div className='card-container'>
 
-        { habitaciones && habitaciones.map((habitacion) => (
+        { mainRooms && mainRooms.map((habitacion) => (
           <div className='roomCard' key={ window.crypto.randomUUID() }>
             <div className="card mb-3">
-              <img src={ habitacion.img } className="card-img-top" alt="..." />
+              <img src={ habitacion.thumbnail } className="card-img-top" alt="..." />
               <div className="card-body">
                 <h5 className="card-title">{ habitacion.type }</h5>
                 <p className="card-text">{ habitacion.description }</p>
